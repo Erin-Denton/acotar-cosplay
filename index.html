@@ -1,0 +1,1272 @@
+<title>A Court of Cosplay</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,opsz,wght@0,6..144,400;0,6..144,500;1,6..144,400&display=swap">
+
+<style>
+/* ============================================================
+   A Court of Cosplay
+   Layout: full-width bands with .inner gutter wrappers
+   Dark-first: Night Court starscape
+   ============================================================ */
+:root {
+  --bg:           #07040f;
+  --surface:      #100821;
+  --card:         #17103a;
+  --card-hover:   #1e1548;
+  --border:       #2c1c5a;
+  --border-hi:    #3e2b7c;
+  --fg:           #ece5f8;
+  --fg-muted:     #a090c0;
+  --fg-dim:       #5c4d7c;
+  --night:        #8860c8;
+  --night-soft:   #b090e0;
+  --night-bg:     rgba(136,96,200,0.12);
+  --spring:       #5a8c5e;
+  --spring-soft:  #86b888;
+  --spring-bg:    rgba(90,140,94,0.12);
+  --autumn:       #c87040;
+  --autumn-soft:  #e09060;
+  --autumn-bg:    rgba(200,112,64,0.12);
+  --rose:         #c45070;
+  --rose-bg:      rgba(196,80,112,0.12);
+  --gold:         #c8a050;
+  --gold-soft:    #e0c070;
+  --gold-bg:      rgba(200,160,80,0.12);
+  --silver:       #90a8c0;
+  --shadow-sm:    0 1px 4px rgba(0,0,0,0.5);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.55);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:         #f0ebfa;
+    --surface:    #e6dff5;
+    --card:       #ffffff;
+    --card-hover: #f5f0ff;
+    --border:     #cdbfec;
+    --border-hi:  #b0a0e0;
+    --fg:         #160c2e;
+    --fg-muted:   #5a4880;
+    --fg-dim:     #9880c0;
+    --night:      #5c3ea0;
+    --night-soft: #8060c8;
+    --night-bg:   rgba(92,62,160,0.1);
+    --spring:     #3a7040;
+    --spring-soft:#5a9060;
+    --spring-bg:  rgba(58,112,64,0.1);
+    --autumn:     #a05818;
+    --autumn-soft:#c07838;
+    --autumn-bg:  rgba(160,88,24,0.1);
+    --rose:       #a03060;
+    --rose-bg:    rgba(160,48,96,0.1);
+    --gold:       #9a7820;
+    --gold-soft:  #c09840;
+    --gold-bg:    rgba(154,120,32,0.1);
+    --silver:     #507090;
+    --shadow-sm:  0 1px 4px rgba(0,0,0,0.12);
+    --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg:         #f0ebfa;
+  --surface:    #e6dff5;
+  --card:       #ffffff;
+  --card-hover: #f5f0ff;
+  --border:     #cdbfec;
+  --border-hi:  #b0a0e0;
+  --fg:         #160c2e;
+  --fg-muted:   #5a4880;
+  --fg-dim:     #9880c0;
+  --night:      #5c3ea0;
+  --night-soft: #8060c8;
+  --night-bg:   rgba(92,62,160,0.1);
+  --spring:     #3a7040;
+  --spring-soft:#5a9060;
+  --spring-bg:  rgba(58,112,64,0.1);
+  --autumn:     #a05818;
+  --autumn-soft:#c07838;
+  --autumn-bg:  rgba(160,88,24,0.1);
+  --rose:       #a03060;
+  --rose-bg:    rgba(160,48,96,0.1);
+  --gold:       #9a7820;
+  --gold-soft:  #c09840;
+  --gold-bg:    rgba(154,120,32,0.1);
+  --silver:     #507090;
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.12);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.65;
+  padding-block: 0;
+}
+
+img { max-width: 100%; }
+
+h1, h2, h3, h4 {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-weight: 600;
+  text-wrap: balance;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+p { margin: 0; }
+a { color: var(--night-soft); text-decoration: none; }
+a:hover { color: var(--fg); }
+
+.inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---- Site header ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 14px;
+}
+
+.site-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--fg);
+  text-transform: uppercase;
+}
+
+.site-logo .logo-accent { color: var(--night-soft); }
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-series {
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.06em;
+  display: none;
+}
+
+@media (min-width: 480px) { .header-series { display: block; } }
+
+.theme-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg-muted);
+  font-size: 0.72rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.theme-btn:hover { border-color: var(--border-hi); color: var(--fg); }
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  padding: 0;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -10%, color-mix(in srgb, var(--night) 22%, transparent), transparent 65%),
+    radial-gradient(ellipse 30% 40% at 10% 110%, color-mix(in srgb, var(--rose) 10%, transparent), transparent 60%),
+    radial-gradient(ellipse 25% 30% at 90% 80%, color-mix(in srgb, var(--gold) 8%, transparent), transparent 55%);
+  pointer-events: none;
+}
+
+/* Tiny stars decorative */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 15%, var(--night-soft) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 8%, var(--fg-dim) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 60% 20%, var(--gold) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 10%, var(--fg-dim) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 35%, var(--night-soft) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 60%, var(--fg-dim) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 5%, var(--silver) 0%, transparent 100%),
+    radial-gradient(1px 1px at 93% 55%, var(--fg-dim) 0%, transparent 100%);
+  opacity: 0.6;
+}
+
+.hero .inner {
+  position: relative;
+  text-align: center;
+  padding-block: 68px 60px;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 5vw, 3.4rem);
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--night-soft);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--fg-muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
+
+.court-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.court-badge {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.cb-night  { color: var(--night-soft);  border-color: var(--night);  background: var(--night-bg); }
+.cb-spring { color: var(--spring-soft); border-color: var(--spring); background: var(--spring-bg); }
+.cb-autumn { color: var(--autumn-soft); border-color: var(--autumn); background: var(--autumn-bg); }
+.cb-gold   { color: var(--gold-soft);   border-color: var(--gold);   background: var(--gold-bg); }
+
+/* ---- Affiliate note ---- */
+.aff-bar {
+  background: color-mix(in srgb, var(--gold) 7%, var(--surface));
+  border-top: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+}
+
+.aff-bar .inner {
+  padding-block: 10px;
+  font-size: 0.8rem;
+  color: var(--fg-dim);
+  font-style: italic;
+}
+
+/* ---- Section helpers ---- */
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 6px;
+}
+
+.section-title { font-size: 1.45rem; margin-bottom: 8px; }
+.section-sub { color: var(--fg-muted); font-size: 0.95rem; margin-bottom: 28px; }
+
+/* ---- Pick section ---- */
+.pick-section { padding-top: 52px; }
+
+/* ---- Char tabs ---- */
+.char-tabs-wrap {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.char-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.char-tabs::-webkit-scrollbar { display: none; }
+
+.char-tab {
+  flex: 0 0 auto;
+  padding: 13px 16px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.char-tab:hover { color: var(--fg); }
+.char-tab.active[data-court="night"]  { color: var(--night-soft);  border-bottom-color: var(--night);  }
+.char-tab.active[data-court="spring"] { color: var(--spring-soft); border-bottom-color: var(--spring); }
+.char-tab.active[data-court="autumn"] { color: var(--autumn-soft); border-bottom-color: var(--autumn); }
+
+/* ---- Character panels ---- */
+.char-panels { padding: 40px 0 60px; }
+
+.char-panel { display: none; }
+.char-panel.active { display: block; }
+
+.char-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.char-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  border: 2px solid;
+}
+
+.char-icon.night  { background: var(--night-bg);  border-color: var(--night); }
+.char-icon.spring { background: var(--spring-bg); border-color: var(--spring); }
+.char-icon.autumn { background: var(--autumn-bg); border-color: var(--autumn); }
+
+.char-meta { flex: 1; min-width: 200px; }
+
+.char-title { font-size: 1.75rem; margin-bottom: 6px; }
+
+.char-court-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border: 1px solid;
+}
+
+.char-court-tag.night  { color: var(--night-soft);  border-color: var(--night);  background: var(--night-bg); }
+.char-court-tag.spring { color: var(--spring-soft); border-color: var(--spring); background: var(--spring-bg); }
+.char-court-tag.autumn { color: var(--autumn-soft); border-color: var(--autumn); background: var(--autumn-bg); }
+
+.char-desc { color: var(--fg-muted); font-size: 0.95rem; margin: 0; }
+
+/* ---- Look sub-tabs (Feyre) ---- */
+.look-sub-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.look-sub-tab {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.look-sub-tab:hover { color: var(--fg); border-color: var(--border-hi); }
+.look-sub-tab.night.active  { color: var(--night-soft);  border-color: var(--night);  background: var(--night-bg); }
+.look-sub-tab.spring.active { color: var(--spring-soft); border-color: var(--spring); background: var(--spring-bg); }
+.look-sub-tab.plain.active  { color: var(--fg);          border-color: var(--border-hi); background: var(--card); }
+
+.sub-panel { display: none; }
+.sub-panel.active { display: block; }
+
+/* ---- Look grid ---- */
+.look-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+.look-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.look-card:hover {
+  border-color: var(--border-hi);
+  box-shadow: var(--shadow-md);
+}
+
+.look-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.look-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.look-level {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--fg-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.04em;
+}
+
+.look-desc {
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  margin: 0 0 16px;
+  line-height: 1.55;
+}
+
+/* ---- Product buttons ---- */
+.product-list { display: flex; flex-direction: column; gap: 7px; }
+
+.product-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-family: 'EB Garamond', serif;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.product-btn:hover {
+  background: var(--card-hover);
+  border-color: var(--border-hi);
+  color: var(--fg);
+}
+
+.btn-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.btn-label { flex: 1; min-width: 0; }
+.btn-arrow { font-size: 0.65rem; color: var(--fg-dim); flex-shrink: 0; }
+
+.product-btn.pn .btn-icon { background: var(--night-bg); }
+.product-btn.ps .btn-icon { background: var(--spring-bg); }
+.product-btn.pa .btn-icon { background: var(--autumn-bg); }
+.product-btn.pr .btn-icon { background: var(--rose-bg); }
+.product-btn.pg .btn-icon { background: var(--gold-bg); }
+
+/* ---- Groups section ---- */
+.groups-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.groups-section .inner { padding-block: 52px; }
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.group-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.group-card h3 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.group-desc {
+  font-size: 0.87rem;
+  color: var(--fg-muted);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.group-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  border: 1px solid;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.chip:hover { opacity: 0.75; }
+.chip.night  { color: var(--night-soft);  border-color: var(--night);  background: var(--night-bg); }
+.chip.spring { color: var(--spring-soft); border-color: var(--spring); background: var(--spring-bg); }
+.chip.autumn { color: var(--autumn-soft); border-color: var(--autumn); background: var(--autumn-bg); }
+
+.group-meta { font-size: 0.78rem; color: var(--fg-dim); }
+
+/* ---- Tips section ---- */
+.tips-section .inner { padding-block: 52px; }
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.tip-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.tip-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: var(--border-hi);
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tip-title { font-size: 0.9rem; margin-bottom: 8px; }
+
+.tip-text { font-size: 0.87rem; color: var(--fg-muted); line-height: 1.55; }
+
+/* ---- Footer ---- */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+footer .inner {
+  padding-block: 28px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--fg-dim);
+}
+
+footer .inner p + p { margin-top: 6px; }
+footer a { color: var(--fg-muted); }
+footer a:hover { color: var(--night-soft); }
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .hero .inner { padding-block: 44px 40px; }
+  .hero h1 { font-size: 1.75rem; }
+  .char-title { font-size: 1.35rem; }
+  .look-grid { grid-template-columns: 1fr; }
+  .char-tab { padding: 11px 12px; font-size: 0.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+
+<!-- ==================== HEADER ==================== -->
+<header class="site-header">
+  <div class="inner">
+    <span class="site-logo">A <span class="logo-accent">Court</span> of Cosplay</span>
+    <div class="header-right">
+      <span class="header-series">Unofficial Fan Guide</span>
+      <button class="theme-btn" id="themeBtn">☀ Light</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="hero-eyebrow">Unofficial Fan Cosplay Guide · A Court of Thorns &amp; Roses</div>
+    <h1>Step Into the <em>World</em></h1>
+    <p class="hero-sub">Character-by-character costume guides for the series — from Night Court High Ladies to winged warriors. Find the pieces. Pick your court.</p>
+    <div class="court-badges">
+      <span class="court-badge cb-night">✦ Night Court</span>
+      <span class="court-badge cb-spring">✿ Spring Court</span>
+      <span class="court-badge cb-autumn">◈ Autumn Court</span>
+      <span class="court-badge cb-gold">◎ Day Court</span>
+    </div>
+  </div>
+</section>
+
+<div class="aff-bar">
+  <div class="inner">Amazon links on this page may be affiliate links — this site earns a small commission at no extra cost to you.</div>
+</div>
+
+<!-- ==================== CHARACTER SECTION ==================== -->
+<section class="pick-section">
+  <div class="inner">
+    <div class="section-label">Start here</div>
+    <h2 class="section-title">Pick Your Character</h2>
+    <p class="section-sub">Each guide shows the one piece people recognize at a distance, then builds from there. Difficulty ratings are for the full assembled look — the quick version of any character is always easier.</p>
+  </div>
+
+  <div class="char-tabs-wrap">
+    <div class="char-tabs" role="tablist" aria-label="Character guides">
+      <button class="char-tab active" data-court="night" data-char="feyre" role="tab" aria-selected="true" aria-controls="panel-feyre">Feyre</button>
+      <button class="char-tab" data-court="night" data-char="rhysand" role="tab" aria-selected="false" aria-controls="panel-rhysand">Rhysand</button>
+      <button class="char-tab" data-court="night" data-char="nesta" role="tab" aria-selected="false" aria-controls="panel-nesta">Nesta</button>
+      <button class="char-tab" data-court="night" data-char="cassian" role="tab" aria-selected="false" aria-controls="panel-cassian">Cassian</button>
+      <button class="char-tab" data-court="night" data-char="azriel" role="tab" aria-selected="false" aria-controls="panel-azriel">Azriel</button>
+      <button class="char-tab" data-court="night" data-char="mor" role="tab" aria-selected="false" aria-controls="panel-mor">Mor</button>
+      <button class="char-tab" data-court="autumn" data-char="lucien" role="tab" aria-selected="false" aria-controls="panel-lucien">Lucien</button>
+      <button class="char-tab" data-court="spring" data-char="elain" role="tab" aria-selected="false" aria-controls="panel-elain">Elain</button>
+      <button class="char-tab" data-court="spring" data-char="tamlin" role="tab" aria-selected="false" aria-controls="panel-tamlin">Tamlin</button>
+    </div>
+  </div>
+
+  <div class="inner">
+    <div class="char-panels">
+
+      <!-- ===== FEYRE ===== -->
+      <div class="char-panel active" id="panel-feyre" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon night">🎨</div>
+          <div class="char-meta">
+            <h3 class="char-title">Feyre Archeron</h3>
+            <span class="char-court-tag night">High Lady · Night Court</span>
+            <p class="char-desc">Huntress, painter, High Lady of the Night Court. Feyre's look changes dramatically across the series — three distinct eras, each recognizable in its own right. Pick the version you love most.</p>
+          </div>
+        </div>
+
+        <div class="look-sub-tabs">
+          <button class="look-sub-tab night active" data-sub="f-night">✦ Night Court (Book 2+)</button>
+          <button class="look-sub-tab spring" data-sub="f-spring">✿ Spring Court (Book 1)</button>
+          <button class="look-sub-tab plain" data-sub="f-mortal">Mortal Huntress (Start of Book 1)</button>
+        </div>
+
+        <div class="sub-panel active" id="f-night">
+          <div class="look-grid">
+            <div class="look-card">
+              <div class="look-card-head">
+                <span class="look-name">Quick Look</span>
+                <span class="look-level">Easy</span>
+              </div>
+              <p class="look-desc">Black gown or flowing dark dress, star or constellation face paint on one cheekbone, silver jewelry. The face paint is the detail that reads as Night Court Feyre from across a convention floor.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black maxi or evening dress</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Star &amp; constellation face paint</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Silver statement jewelry set</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+            <div class="look-card">
+              <div class="look-card-head">
+                <span class="look-name">High Lady Full Build</span>
+                <span class="look-level">Weekend project</span>
+              </div>
+              <p class="look-desc">Add a dramatic midnight cape, a star and crescent moon crown, and rhinestone gems to press along the cheekbone. A deep plum gown works if you want color over pure black.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Star &amp; crescent moon crown</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black / midnight blue cape</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Celestial rhinestone face gems</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌙</span><span class="btn-label">Deep plum formal gown (alt.)</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-panel" id="f-spring">
+          <div class="look-grid">
+            <div class="look-card">
+              <div class="look-card-head">
+                <span class="look-name">Spring Court Quick Look</span>
+                <span class="look-level">Easiest</span>
+              </div>
+              <p class="look-desc">Flowing sage green or blush dress, wildflower crown, and delicate leaf earrings. Feyre's Spring Court look is soft and fae — feminine with a restrained wildness to it.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌿</span><span class="btn-label">Sage green chiffon / flowy dress</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌸</span><span class="btn-label">Wildflower floral crown</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🍃</span><span class="btn-label">Gold leaf &amp; green earrings</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-panel" id="f-mortal">
+          <div class="look-grid">
+            <div class="look-card">
+              <div class="look-card-head">
+                <span class="look-name">The Huntress</span>
+                <span class="look-level">Easiest</span>
+              </div>
+              <p class="look-desc">Brown or dark green faux-leather jacket, worn trousers, and boots. Feyre starts the story as a mortal hunter keeping her family from starving. Add a bow and quiver prop and it reads immediately.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Brown faux-leather jacket</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🏹</span><span class="btn-label">Foam bow &amp; quiver prop set</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Worn leather / combat boots</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RHYSAND ===== -->
+      <div class="char-panel" id="panel-rhysand" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon night">🌌</div>
+          <div class="char-meta">
+            <h3 class="char-title">Rhysand</h3>
+            <span class="char-court-tag night">High Lord · Night Court</span>
+            <p class="char-desc">High Lord of the Night Court. Violet eyes, dark hair, vast dark wings. Rhysand's look is unmistakably powerful — all controlled shadow and restrained danger. He dresses like he knows exactly how terrifying he is.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">All black: fitted black trousers, a high-collar black shirt or jacket. Add violet colored contacts if you want. The look alone reads as Rhysand to anyone who's read the books.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black high-collar dress shirt</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Black slim-fit trousers</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Violet / amethyst colored contacts</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Full Wings Build</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Add wings, a long dramatic frock coat, and silver star jewelry. Wings can be large feathered costume wings painted matte black, or a harness worn under a cape that drapes like folded wings.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Large black wings / wing harness</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Long black frock coat</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Silver star &amp; moon jewelry</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💠</span><span class="btn-label">Face rhinestone gems</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== NESTA ===== -->
+      <div class="char-panel" id="panel-nesta" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon night">⚔️</div>
+          <div class="char-meta">
+            <h3 class="char-title">Nesta Archeron</h3>
+            <span class="char-court-tag night">Valkyrie · Night Court</span>
+            <p class="char-desc">Feyre's fierce older sister. Turned fae against her will, she channels rage and grief into becoming a Valkyrie. The warrior look is silver, sharp, and proud.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Silver or icy white dress with a structured warrior belt and silver arm cuffs. Nesta's power came from enchanted objects — silver metallic details throughout signal her story.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥈</span><span class="btn-label">Silver / icy white formal dress</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⚔️</span><span class="btn-label">Wide structured warrior belt</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Silver arm cuffs / bracers</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Valkyrie Full Build</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Add the silver crown, a dramatic silver or white cape, and Athalar-style pointed fae ears. This is the Nesta who earned her Valkyrie title — cold-beautiful, unbreakable.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Silver leaf / warrior crown</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Silver / white dramatic cape</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CASSIAN ===== -->
+      <div class="char-panel" id="panel-cassian" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon night">🗡️</div>
+          <div class="char-meta">
+            <h3 class="char-title">Cassian</h3>
+            <span class="char-court-tag night">General · Night Court</span>
+            <p class="char-desc">General of Rhysand's armies and a warrior to his core. Battle-worn black leathers, massive wings, and war paint. He fights like he enjoys it, because he does.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Black tactical jacket over a dark base, black combat boots, and war paint lines across the cheekbones and jaw. The face paint is Cassian's signature marker and takes five minutes with black face paint.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black tactical / field jacket</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">Black face paint (war paint)</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Full Warrior Build</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Add wings and faux leather armor panels or vest. A dark red bracer or sash adds the warrior camp color — brutal, imposing, ready for anything.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Black wings / wing harness</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🛡️</span><span class="btn-label">Faux-leather armor vest</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">🔴</span><span class="btn-label">Dark red leather bracer / sash</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== AZRIEL ===== -->
+      <div class="char-panel" id="panel-azriel" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon night">🌑</div>
+          <div class="char-meta">
+            <h3 class="char-title">Azriel</h3>
+            <span class="char-court-tag night">Spymaster · Night Court</span>
+            <p class="char-desc">Spymaster of the Night Court. Azriel moves like something darker than shadow — close-fitting matte blacks, a hooded cloak, and scarred hands always hidden in dark gloves. Quiet. Lethal. Watching.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Black hooded cloak over all black, and dark leather gloves covering the hands and wrists. The gloves are the non-negotiable piece — Azriel's scarred hands are never uncovered. Keep everything muted, not dramatic.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black hooded cloak</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧤</span><span class="btn-label">Black leather gloves</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⚫</span><span class="btn-label">Black fitted base outfit</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Spymaster Full Build</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Add a black-bladed knife prop and matte dark wings. Azriel's wings are darker and less prominent than Cassian's, so fabric wings in near-black charcoal work better than feathered ones here.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Black dagger prop</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Charcoal / matte black wings</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💨</span><span class="btn-label">Dark grey body / shadow paint</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MOR ===== -->
+      <div class="char-panel" id="panel-mor" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon night">💫</div>
+          <div class="char-meta">
+            <h3 class="char-title">Morrigan (Mor)</h3>
+            <span class="char-court-tag night">Third-in-Command · Night Court</span>
+            <p class="char-desc">The most powerful female warrior alive, Rhysand's Third-in-Command. Mor walks into a room and everyone knows it — usually in deep red or gold, devastatingly dressed for exactly the effect she intends.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">The Red Dress Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Deep crimson bodycon or flowing red dress, gold jewelry stacked throughout, long golden blonde hair (wig if needed). The red dress is Mor's most recognized look — her armor for the political courts.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Deep red bodycon / formal dress</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold layered jewelry set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">👱</span><span class="btn-label">Long golden blonde wig</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💋</span><span class="btn-label">Bold red lip color</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Full Build + Wings</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Mor can teleport, so she doesn't need armor — she shows up dressed for the occasion and then happens to have wings. Add wings and a gold hair accessory to complete the look.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦋</span><span class="btn-label">Large feathered wings</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Gold hair comb / ornament</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">Gold / warm eyeshadow palette</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LUCIEN ===== -->
+      <div class="char-panel" id="panel-lucien" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon autumn">🦊</div>
+          <div class="char-meta">
+            <h3 class="char-title">Lucien Vanserra</h3>
+            <span class="char-court-tag autumn">Emissary · Autumn Court</span>
+            <p class="char-desc">Son of the Autumn Court, emissary to the Spring Court. Auburn hair, a mechanical eye — a gift from Helion — and the kind of warm copper palette that makes him look like he walked out of a fae autumn. Sharp and a little sad.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Auburn or copper wig (if needed), rust or amber tunic, and a steampunk-style mechanical eye patch or gear eye prosthetic. The eye is Lucien's most distinctive feature and the piece that makes the costume click.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🦊</span><span class="btn-label">Auburn / copper-red wig</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🟧</span><span class="btn-label">Rust / amber tunic or vest</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">⚙️</span><span class="btn-label">Steampunk mechanical eye patch</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Full Autumn Court Build</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Build out the Autumn Court palette in full: rust, amber, burnt orange, and deep gold. Add a cape in autumn-leaf shades, copper jewelry, and pointed fae ears. This is Lucien at his most court-recognizable.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🍂</span><span class="btn-label">Autumn-toned cape / cloak</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Copper &amp; gold jewelry set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ELAIN ===== -->
+      <div class="char-panel" id="panel-elain" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon spring">🌺</div>
+          <div class="char-meta">
+            <h3 class="char-title">Elain Archeron</h3>
+            <span class="char-court-tag spring">Seer · Night Court</span>
+            <p class="char-desc">The gentlest Archeron sister. A Seer made fae, she tends her garden and sees visions of the future. Elain's look is soft, floral, and quietly ethereal — she belongs in a sunlit greenhouse, or somewhere beautiful and just slightly strange.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easiest</span>
+            </div>
+            <p class="look-desc">Soft floral dress in blush, ivory, or pale yellow, wildflower crown, and delicate gold jewelry. Elain is the most approachable of the three sisters to costume — she looks like a fairy-tale princess who spends mornings in the garden.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌸</span><span class="btn-label">Blush / floral midi or maxi dress</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌼</span><span class="btn-label">Wildflower / meadow floral crown</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Delicate gold chain jewelry</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Garden Seer Full Build</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Add a small wicker basket with faux flower stems as a prop, a soft linen apron layered over the dress, and subtle pointed fae ears. The Seer look keeps the beauty but adds a dreaming, faraway quality to it.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🧺</span><span class="btn-label">Small wicker / rattan basket (prop)</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌷</span><span class="btn-label">Faux flower stems (prop bouquet)</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Subtle pointed ear tips</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TAMLIN ===== -->
+      <div class="char-panel" id="panel-tamlin" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon spring">🌿</div>
+          <div class="char-meta">
+            <h3 class="char-title">Tamlin</h3>
+            <span class="char-court-tag spring">High Lord · Spring Court</span>
+            <p class="char-desc">High Lord of the Spring Court. Blonde, green-eyed, and cursed to wear a mask by ancient magic. Tamlin's look combines the Spring Court's wild abundance with the gold mask that became one of the series' most iconic images.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">Quick Look</span>
+              <span class="look-level">Easy</span>
+            </div>
+            <p class="look-desc">Forest-green tunic or vest over natural earth tones, and the gold leaf masquerade mask. The mask is what makes people say "Tamlin" — everything else supports it, but the mask is the costume.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌲</span><span class="btn-label">Forest green tunic / linen vest</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🎭</span><span class="btn-label">Gold leaf masquerade mask</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🦌</span><span class="btn-label">Antler headpiece / crown</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head">
+              <span class="look-name">High Lord Full Build</span>
+              <span class="look-level">Weekend project</span>
+            </div>
+            <p class="look-desc">Add a dramatic forest-green hooded cloak, Spring Court gold accents throughout, and pointed fae ears. For his beast aspect, fur-trimmed layers add a wilder, more dangerous edge to the nature-king look.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Forest green hooded cloak</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold &amp; green jewelry / belt</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .char-panels -->
+  </div><!-- end .inner -->
+</section>
+
+<!-- ==================== GROUPS ==================== -->
+<section class="groups-section">
+  <div class="inner">
+    <div class="section-label">Go together</div>
+    <h2 class="section-title">Group &amp; Couples Cosplay</h2>
+    <p class="section-sub">These stories are built around found families. These group combinations are the ones that get recognized immediately at conventions.</p>
+    <div class="group-grid">
+
+      <div class="group-card">
+        <h3>The Inner Circle</h3>
+        <p class="group-desc">The Night Court's core group from Book 2 onward. All dark aesthetics, star motifs, and loyalty that cuts both ways. The most recognized group cosplay in the fandom.</p>
+        <div class="group-chips">
+          <a class="chip night" href="#" onclick="switchTo('rhysand');return false;">🌌 Rhysand</a>
+          <a class="chip night" href="#" onclick="switchTo('feyre');return false;">🎨 Feyre</a>
+          <a class="chip night" href="#" onclick="switchTo('cassian');return false;">🗡️ Cassian</a>
+          <a class="chip night" href="#" onclick="switchTo('azriel');return false;">🌑 Azriel</a>
+          <a class="chip night" href="#" onclick="switchTo('mor');return false;">💫 Mor</a>
+        </div>
+        <p class="group-meta">5 people · All Night Court · Dark palette, individual accents</p>
+      </div>
+
+      <div class="group-card">
+        <h3>The Archeron Sisters</h3>
+        <p class="group-desc">Three sisters, three very different energies. Works as a trio or in any pairing. Feyre and Nesta have the most friction; Elain is the visual contrast that ties the trio together.</p>
+        <div class="group-chips">
+          <a class="chip night" href="#" onclick="switchTo('feyre');return false;">🎨 Feyre</a>
+          <a class="chip night" href="#" onclick="switchTo('nesta');return false;">⚔️ Nesta</a>
+          <a class="chip spring" href="#" onclick="switchTo('elain');return false;">🌺 Elain</a>
+        </div>
+        <p class="group-meta">3 people · Mixed courts · Stars vs. silver vs. florals</p>
+      </div>
+
+      <div class="group-card">
+        <h3>The Spring Court Pair</h3>
+        <p class="group-desc">The original ACOTAR Book 1 duo. Feyre in her early Spring Court look paired with Tamlin's masked, nature-king aesthetic. A natural couples cosplay for the book that started it all.</p>
+        <div class="group-chips">
+          <a class="chip spring" href="#" onclick="switchTo('tamlin');return false;">🌿 Tamlin</a>
+          <a class="chip spring" href="#" onclick="switchTo('feyre');return false;">🎨 Feyre (Spring)</a>
+        </div>
+        <p class="group-meta">2 people · Spring Court · Greens, golds, florals, and the mask</p>
+      </div>
+
+      <div class="group-card">
+        <h3>The Warrior Brothers</h3>
+        <p class="group-desc">Rhysand, Cassian, and Azriel — the Night Court's core trio of power. All wings, all dark leathers, all terrifying in different ways. Works as a full three-person group or in any pairing.</p>
+        <div class="group-chips">
+          <a class="chip night" href="#" onclick="switchTo('rhysand');return false;">🌌 Rhysand</a>
+          <a class="chip night" href="#" onclick="switchTo('cassian');return false;">⚔️ Cassian</a>
+          <a class="chip night" href="#" onclick="switchTo('azriel');return false;">🌑 Azriel</a>
+        </div>
+        <p class="group-meta">3 people · Winged warriors · Wings + dark leathers</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TIPS ==================== -->
+<section class="tips-section">
+  <div class="inner">
+    <div class="section-label">Before you shop</div>
+    <h2 class="section-title">Tips for ACOTAR Cosplay</h2>
+    <p class="section-sub">Four questions that determine which direction to build from.</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-num">01</div>
+        <h3 class="tip-title">Find the one recognizable piece first</h3>
+        <p class="tip-text">Every character has a single element that makes people say the name from across a convention hall. Rhysand's violet eyes. Tamlin's gold mask. Lucien's mechanical eye. Mor's red dress. Build outward from that piece — it's the anchor everything else supports.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-num">02</div>
+        <h3 class="tip-title">Court color reads from a distance</h3>
+        <p class="tip-text">If the specific pieces aren't in budget, lean on court palette: Night Court characters wear deep black, purple, and silver. Spring Court runs in forest greens and spring gold. Autumn Court is copper, rust, and amber. Color-coding reads before anyone sees a prop or detail.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-num">03</div>
+        <h3 class="tip-title">Wings at conventions: plan ahead</h3>
+        <p class="tip-text">Winged costumes are iconic but take significant space. At a crowded convention, articulating wings that fold flat are worth the extra cost. Check venue prop policies before you commit to a wingspan — some have limits. Fabric and foam wings are easier to manage than feathered ones in a crowd.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-num">04</div>
+        <h3 class="tip-title">Ear tips make it fae</h3>
+        <p class="tip-text">Silicone pointed ear tips are the single most cost-effective upgrade in ACOTAR cosplay. Applied with spirit gum, they sit on the outside of your own ear and stay put through a full convention day. Matched to your skin tone, they read effortlessly and photograph beautifully — a simple detail that transforms any look into fae royalty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="inner">
+    <p>A Court of Cosplay &mdash; an unofficial fan guide</p>
+    <p>This site is not affiliated with, endorsed by, or sponsored by Sarah J. Maas, Bloomsbury Publishing, or Fireheart Inc. Character names, series titles, and related marks including <em>A Court of Thorns and Roses</em>, Feyre, and others are trademarks or intellectual property of Fireheart Inc. and their respective owners. This site refers to those works by name solely to identify the characters being cosplayed (nominative fair use) and makes no claim of ownership or affiliation.</p>
+    <p style="margin-top: 6px;">Amazon links may be affiliate links — this site earns a small commission at no extra cost to you.</p>
+  </div>
+</footer>
+
+<script>
+// ---- Theme toggle ----
+const themeBtn = document.getElementById('themeBtn');
+const root = document.documentElement;
+let isDark = !window.matchMedia('(prefers-color-scheme: light)').matches;
+
+function applyTheme() {
+  root.dataset.theme = isDark ? 'dark' : 'light';
+  themeBtn.textContent = isDark ? '☀ Light' : '☾ Dark';
+}
+
+try {
+  const saved = localStorage.getItem('prythian-theme');
+  if (saved === 'dark') isDark = true;
+  else if (saved === 'light') isDark = false;
+} catch(e) {}
+
+applyTheme();
+
+themeBtn.addEventListener('click', () => {
+  isDark = !isDark;
+  applyTheme();
+  try { localStorage.setItem('prythian-theme', isDark ? 'dark' : 'light'); } catch(e) {}
+});
+
+// ---- Character tab switching ----
+const charTabs = document.querySelectorAll('.char-tab');
+const charPanels = document.querySelectorAll('.char-panel');
+
+function switchTo(charId) {
+  charTabs.forEach(t => {
+    const active = t.dataset.char === charId;
+    t.classList.toggle('active', active);
+    t.setAttribute('aria-selected', String(active));
+  });
+  charPanels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + charId));
+  document.querySelector('.char-tabs-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+charTabs.forEach(tab => {
+  tab.addEventListener('click', () => switchTo(tab.dataset.char));
+});
+
+// ---- Feyre sub-tabs ----
+document.querySelectorAll('.look-sub-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const panel = tab.closest('.char-panel');
+    panel.querySelectorAll('.look-sub-tab').forEach(t => t.classList.remove('active'));
+    panel.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.sub)?.classList.add('active');
+  });
+});
+</script>
