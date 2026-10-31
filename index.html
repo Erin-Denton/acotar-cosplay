@@ -34,6 +34,15 @@
   --gold-soft:    #e0c070;
   --gold-bg:      rgba(200,160,80,0.12);
   --silver:       #90a8c0;
+  --cc:           #4070c8;
+  --cc-soft:      #80a0e8;
+  --cc-bg:        rgba(64,112,200,0.12);
+  --tog:          #c87030;
+  --tog-soft:     #e09050;
+  --tog-bg:       rgba(200,112,48,0.12);
+  --fw:           #b03030;
+  --fw-soft:      #d05050;
+  --fw-bg:        rgba(176,48,48,0.12);
   --shadow-sm:    0 1px 4px rgba(0,0,0,0.5);
   --shadow-md:    0 4px 16px rgba(0,0,0,0.55);
   color-scheme: dark;
@@ -65,6 +74,15 @@
     --gold-soft:  #c09840;
     --gold-bg:    rgba(154,120,32,0.1);
     --silver:     #507090;
+    --cc:         #2a5ab8;
+    --cc-soft:    #5080d8;
+    --cc-bg:      rgba(42,90,184,0.1);
+    --tog:        #a05820;
+    --tog-soft:   #c07840;
+    --tog-bg:     rgba(160,88,32,0.1);
+    --fw:         #902020;
+    --fw-soft:    #b04040;
+    --fw-bg:      rgba(144,32,32,0.1);
     --shadow-sm:  0 1px 4px rgba(0,0,0,0.12);
     --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
     color-scheme: light;
@@ -96,6 +114,15 @@
   --gold-soft:  #c09840;
   --gold-bg:    rgba(154,120,32,0.1);
   --silver:     #507090;
+  --cc:         #2a5ab8;
+  --cc-soft:    #5080d8;
+  --cc-bg:      rgba(42,90,184,0.1);
+  --tog:        #a05820;
+  --tog-soft:   #c07840;
+  --tog-bg:     rgba(160,88,32,0.1);
+  --fw:         #902020;
+  --fw-soft:    #b04040;
+  --fw-bg:      rgba(144,32,32,0.1);
   --shadow-sm:  0 1px 4px rgba(0,0,0,0.12);
   --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
   color-scheme: light;
@@ -666,6 +693,85 @@ footer a:hover { color: var(--night-soft); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
 }
+
+/* ---- Series nav ---- */
+.series-nav {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 53px;
+  z-index: 90;
+}
+
+.series-tabs {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.series-tabs::-webkit-scrollbar { display: none; }
+
+.series-tab {
+  flex: 0 0 auto;
+  padding: 14px 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border: none;
+  background: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.series-tab:hover { color: var(--fg); }
+.series-tab.active[data-series="acotar"]        { color: var(--night-soft);  border-bottom-color: var(--night); }
+.series-tab.active[data-series="crescent-city"] { color: var(--cc-soft);     border-bottom-color: var(--cc); }
+.series-tab.active[data-series="throne-of-glass"]{ color: var(--tog-soft);   border-bottom-color: var(--tog); }
+.series-tab.active[data-series="fourth-wing"]   { color: var(--fw-soft);     border-bottom-color: var(--fw); }
+
+.series-panel { display: none; }
+.series-panel.active { display: block; }
+
+/* ---- New series color classes ---- */
+.char-icon.cc  { background: var(--cc-bg);  border-color: var(--cc); }
+.char-icon.tog { background: var(--tog-bg); border-color: var(--tog); }
+.char-icon.fw  { background: var(--fw-bg);  border-color: var(--fw); }
+
+.char-court-tag.cc  { color: var(--cc-soft);  border-color: var(--cc);  background: var(--cc-bg); }
+.char-court-tag.tog { color: var(--tog-soft); border-color: var(--tog); background: var(--tog-bg); }
+.char-court-tag.fw  { color: var(--fw-soft);  border-color: var(--fw);  background: var(--fw-bg); }
+
+.char-tab.active[data-court="cc"]  { color: var(--cc-soft);  border-bottom-color: var(--cc); }
+.char-tab.active[data-court="tog"] { color: var(--tog-soft); border-bottom-color: var(--tog); }
+.char-tab.active[data-court="fw"]  { color: var(--fw-soft);  border-bottom-color: var(--fw); }
+
+.chip.cc  { color: var(--cc-soft);  border-color: var(--cc);  background: var(--cc-bg); }
+.chip.tog { color: var(--tog-soft); border-color: var(--tog); background: var(--tog-bg); }
+.chip.fw  { color: var(--fw-soft);  border-color: var(--fw);  background: var(--fw-bg); }
+
+.product-btn.pcc  .btn-icon { background: var(--cc-bg); }
+.product-btn.ptog .btn-icon { background: var(--tog-bg); }
+.product-btn.pfw  .btn-icon { background: var(--fw-bg); }
+
+.look-sub-tab.cc.active  { color: var(--cc-soft);  border-color: var(--cc);  background: var(--cc-bg); }
+.look-sub-tab.tog.active { color: var(--tog-soft); border-color: var(--tog); background: var(--tog-bg); }
+.look-sub-tab.fw.active  { color: var(--fw-soft);  border-color: var(--fw);  background: var(--fw-bg); }
+
+.cb-cc  { color: var(--cc-soft);  border-color: var(--cc);  background: var(--cc-bg); }
+.cb-tog { color: var(--tog-soft); border-color: var(--tog); background: var(--tog-bg); }
+.cb-fw  { color: var(--fw-soft);  border-color: var(--fw);  background: var(--fw-bg); }
+
+@media (max-width: 600px) {
+  .series-tab { padding: 11px 14px; font-size: 0.68rem; }
+}
 </style>
 
 <!-- ==================== HEADER ==================== -->
@@ -685,14 +791,14 @@ footer a:hover { color: var(--night-soft); }
 <section class="hero">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="inner">
-    <div class="hero-eyebrow">Unofficial Fan Cosplay Guide · A Court of Thorns &amp; Roses</div>
+    <div class="hero-eyebrow">Unofficial Fan Cosplay Guide · Fantasy Book Series</div>
     <h1>Step Into the <em>World</em></h1>
-    <p class="hero-sub">Character-by-character costume guides for the series — from Night Court High Ladies to winged warriors. Find the pieces. Pick your court.</p>
+    <p class="hero-sub">Character-by-character costume guides for ACOTAR, Crescent City, Throne of Glass, and Fourth Wing. Find the pieces. Pick your character.</p>
     <div class="court-badges">
-      <span class="court-badge cb-night">✦ Night Court</span>
-      <span class="court-badge cb-spring">✿ Spring Court</span>
-      <span class="court-badge cb-autumn">◈ Autumn Court</span>
-      <span class="court-badge cb-gold">◎ Day Court</span>
+      <span class="court-badge cb-night">✦ ACOTAR</span>
+      <span class="court-badge cb-cc">◈ Crescent City</span>
+      <span class="court-badge cb-tog">🔥 Throne of Glass</span>
+      <span class="court-badge cb-fw">🐉 Fourth Wing</span>
     </div>
   </div>
 </section>
@@ -700,6 +806,18 @@ footer a:hover { color: var(--night-soft); }
 <div class="aff-bar">
   <div class="inner">Amazon links on this page may be affiliate links — this site earns a small commission at no extra cost to you.</div>
 </div>
+
+<!-- ==================== SERIES NAV ==================== -->
+<nav class="series-nav" aria-label="Series selection">
+  <div class="series-tabs" role="tablist">
+    <button class="series-tab active" data-series="acotar" role="tab" aria-selected="true" aria-controls="series-acotar">🌹 A Court of Thorns &amp; Roses</button>
+    <button class="series-tab" data-series="crescent-city" role="tab" aria-selected="false" aria-controls="series-crescent-city">🌆 Crescent City</button>
+    <button class="series-tab" data-series="throne-of-glass" role="tab" aria-selected="false" aria-controls="series-throne-of-glass">🔥 Throne of Glass</button>
+    <button class="series-tab" data-series="fourth-wing" role="tab" aria-selected="false" aria-controls="series-fourth-wing">🐉 Fourth Wing</button>
+  </div>
+</nav>
+
+<div class="series-panel active" id="series-acotar">
 
 <!-- ==================== CHARACTER SECTION ==================== -->
 <section class="pick-section">
@@ -752,8 +870,8 @@ footer a:hover { color: var(--night-soft); }
               </div>
               <p class="look-desc">Black gown or flowing dark dress, star or constellation face paint on one cheekbone, silver jewelry. The face paint is the detail that reads as Night Court Feyre from across a convention floor.</p>
               <div class="product-list">
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black maxi or evening dress</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Star &amp; constellation face paint</span><span class="btn-arrow">→</span></a>
+                <a href="https://link.amazon/B0ejWu1ud" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black maxi or evening dress</span><span class="btn-arrow">→</span></a>
+                <a href="https://link.amazon/B0ctnWhm8" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Add sparkles to your skin and glow</span><span class="btn-arrow">→</span></a>
                 <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Silver statement jewelry set</span><span class="btn-arrow">→</span></a>
               </div>
             </div>
@@ -1186,12 +1304,578 @@ footer a:hover { color: var(--night-soft); }
   </div>
 </section>
 
+</div><!-- end #series-acotar -->
+
+<!-- ==================== CRESCENT CITY ==================== -->
+<div class="series-panel" id="series-crescent-city">
+<section class="pick-section">
+  <div class="inner">
+    <div class="section-label">Crescent City</div>
+    <h2 class="section-title">Pick Your Character</h2>
+    <p class="section-sub">Half-humans, fallen angels, and Fae royalty navigating a neon-lit city. Bryce and Hunt are the heart of it — pick your person.</p>
+  </div>
+  <div class="char-tabs-wrap">
+    <div class="char-tabs" role="tablist" aria-label="Crescent City characters">
+      <button class="char-tab active" data-court="cc" data-char="cc-bryce" role="tab" aria-selected="true">Bryce</button>
+      <button class="char-tab" data-court="cc" data-char="cc-hunt" role="tab" aria-selected="false">Hunt</button>
+      <button class="char-tab" data-court="cc" data-char="cc-ruhn" role="tab" aria-selected="false">Ruhn</button>
+      <button class="char-tab" data-court="cc" data-char="cc-lidia" role="tab" aria-selected="false">Lidia</button>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="char-panels">
+
+      <!-- ===== BRYCE ===== -->
+      <div class="char-panel active" id="panel-cc-bryce" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon cc">⭐</div>
+          <div class="char-meta">
+            <h3 class="char-title">Bryce Quinlan</h3>
+            <span class="char-court-tag cc">Half-Fae · Crescent City</span>
+            <p class="char-desc">Half-human, half-Fae party girl turned reluctant hero. Long auburn hair, a glowing star scar in the center of her chest, and an irreverent confidence that masks everything underneath. The star is what makes her Bryce from across a convention floor.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Fitted jeans or leather pants, a casual blouse or crop top, and a glowing star body paint or adhesive gem on the sternum. The star scar is Bryce's signature — everything else is stylish street clothes.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Star chest scar body gem / decal</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Fitted leather jacket</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🦰</span><span class="btn-label">Long auburn / red-brown wig</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add glowing LED body paint or UV star effect for the scar, gold layered jewelry, and pointed fae ears. For the later books look, dark leathers and combat boots replace the casual aesthetic — still star scar, always.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">UV / neon star body paint</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Gold layered jewelry set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Subtle pointed fae ear tips</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== HUNT ===== -->
+      <div class="char-panel" id="panel-cc-hunt" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon cc">🦅</div>
+          <div class="char-meta">
+            <h3 class="char-title">Hunt Athalar</h3>
+            <span class="char-court-tag cc">Fallen Angel · Crescent City</span>
+            <p class="char-desc">A fallen angel with massive grey wings and a halo brand seared into his brow. Powerful, brooding, and carrying centuries of pain. The halo tattoo on the forehead and the grey wings are his defining marks.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Dark tactical outfit, large grey or charcoal wings, and a halo temporary tattoo across the forehead. The halo brand is the piece that identifies Hunt immediately — without it, he's just a winged figure in black.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🌀</span><span class="btn-label">Halo / arc temporary brow tattoo</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🪶</span><span class="btn-label">Large grey / charcoal wings</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black tactical outfit</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Warrior Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add a dark leather tactical vest or armor panels, wrist restraint cuffs (symbolizing his bound state in earlier books), and combat boots. Grey wings in the largest size you can manage — Hunt's are enormous.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🛡️</span><span class="btn-label">Dark leather tactical vest</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">⛓️</span><span class="btn-label">Wrist cuff restraints (prop)</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RUHN ===== -->
+      <div class="char-panel" id="panel-cc-ruhn" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon cc">🔮</div>
+          <div class="char-meta">
+            <h3 class="char-title">Ruhn Danaan</h3>
+            <span class="char-court-tag cc">Fae Prince · Crescent City</span>
+            <p class="char-desc">Punk Fae prince with a dark Starsword at his hip. Black hair, dragon tattoos covering both arms, and the aesthetics of someone who rejected royal expectations and leaned straight into them anyway. Equal parts edge and reluctant heir.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Black jeans, leather jacket, and dragon arm tattoo sleeves. Ruhn's punk-Fae identity is the whole look — the tattoo sleeves read immediately as him. Add pointed ears to signal his Fae heritage.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon tattoo arm sleeves</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black moto leather jacket</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Build + Starsword</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add a black-bladed sword prop, dark blue or black-tipped hair color spray, and silver jewelry. The Starsword is a black blade that drinks light rather than reflecting it — flat matte black is exactly right for the prop.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Black matte sword prop</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Dark blue / black hair color spray</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💍</span><span class="btn-label">Silver ring stack set</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LIDIA ===== -->
+      <div class="char-panel" id="panel-cc-lidia" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon cc">🔥</div>
+          <div class="char-meta">
+            <h3 class="char-title">Lidia Cervos</h3>
+            <span class="char-court-tag cc">The Hind · Crescent City</span>
+            <p class="char-desc">Intelligence operative with cold precision and a military bearing that never slips. Ivory and gold are her colors — every detail deliberate, nothing out of place. Lidia's costume is the look of someone who decided exactly who they are and dressed accordingly.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Military-cut ivory blazer or structured jacket, fitted dark trousers, and gold insignia pin. The sharp, deliberate silhouette is the costume — Lidia looks like she was assembled rather than dressed.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Ivory / cream structured blazer</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🏅</span><span class="btn-label">Gold military insignia pin</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">👢</span><span class="btn-label">Black high-heeled boots</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Uniform Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Build out the full fantasy military look: add gold epaulette shoulder details, a fitted ivory bodysuit as a base, and sleek gold jewelry. Cool, controlled, and deliberately intimidating.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold epaulette shoulder pieces</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Minimal gold jewelry set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Fitted ivory bodysuit</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .char-panels -->
+  </div><!-- end .inner -->
+</section>
+
+<section class="groups-section">
+  <div class="inner">
+    <div class="section-label">Go together</div>
+    <h2 class="section-title">Group &amp; Couples Cosplay</h2>
+    <p class="section-sub">The found family at the heart of Crescent City — from the city's most dangerous couple to the trio that holds everything together.</p>
+    <div class="group-grid">
+      <div class="group-card">
+        <h3>Bryce &amp; Hunt</h3>
+        <p class="group-desc">The heart of the series. A half-Fae woman with a glowing star scar and a fallen angel with grey wings and a halo brand. Together they are immediately recognizable and visually arresting from any distance.</p>
+        <div class="group-chips">
+          <a class="chip cc" href="#" onclick="switchCharInSeries('cc-bryce');return false;">⭐ Bryce</a>
+          <a class="chip cc" href="#" onclick="switchCharInSeries('cc-hunt');return false;">🦅 Hunt</a>
+        </div>
+        <p class="group-meta">2 people · Star scar + halo brand + grey wings</p>
+      </div>
+      <div class="group-card">
+        <h3>The City Trio</h3>
+        <p class="group-desc">Bryce, Hunt, and Ruhn — the core three who keep the city standing. The contrast of Bryce's warm auburn, Hunt's dark wings, and Ruhn's punk-Fae edge makes them read as a group immediately.</p>
+        <div class="group-chips">
+          <a class="chip cc" href="#" onclick="switchCharInSeries('cc-bryce');return false;">⭐ Bryce</a>
+          <a class="chip cc" href="#" onclick="switchCharInSeries('cc-hunt');return false;">🦅 Hunt</a>
+          <a class="chip cc" href="#" onclick="switchCharInSeries('cc-ruhn');return false;">🔮 Ruhn</a>
+        </div>
+        <p class="group-meta">3 people · City blues + star + wings + Starsword</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- end #series-crescent-city -->
+
+<!-- ==================== THRONE OF GLASS ==================== -->
+<div class="series-panel" id="series-throne-of-glass">
+<section class="pick-section">
+  <div class="inner">
+    <div class="section-label">Throne of Glass</div>
+    <h2 class="section-title">Pick Your Character</h2>
+    <p class="section-sub">Assassins, witches, princes, and the last heir of a destroyed kingdom. Each character has a look as distinct as their power.</p>
+  </div>
+  <div class="char-tabs-wrap">
+    <div class="char-tabs" role="tablist" aria-label="Throne of Glass characters">
+      <button class="char-tab active" data-court="tog" data-char="tog-aelin" role="tab" aria-selected="true">Aelin</button>
+      <button class="char-tab" data-court="tog" data-char="tog-rowan" role="tab" aria-selected="false">Rowan</button>
+      <button class="char-tab" data-court="tog" data-char="tog-manon" role="tab" aria-selected="false">Manon</button>
+      <button class="char-tab" data-court="tog" data-char="tog-dorian" role="tab" aria-selected="false">Dorian</button>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="char-panels">
+
+      <!-- ===== AELIN ===== -->
+      <div class="char-panel active" id="panel-tog-aelin" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon tog">🌟</div>
+          <div class="char-meta">
+            <h3 class="char-title">Aelin Galathynius</h3>
+            <span class="char-court-tag tog">Queen · Terrasen</span>
+            <p class="char-desc">Assassin, queen, last heir of Terrasen. Aelin's look transforms over the series — the ruthless assassin in black fighting leathers early on, the gold-and-white queen she becomes later. Turquoise eyes are her defining feature. Two very different builds, both unmistakably her.</p>
+          </div>
+        </div>
+        <div class="look-sub-tabs">
+          <button class="look-sub-tab tog active" data-sub="tog-aelin-assassin">⚔️ Assassin Look</button>
+          <button class="look-sub-tab tog" data-sub="tog-aelin-queen">👑 Queen Look</button>
+        </div>
+        <div class="sub-panel active" id="tog-aelin-assassin">
+          <div class="look-grid">
+            <div class="look-card">
+              <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+              <p class="look-desc">Form-fitting black fighting leathers or a black bodysuit with dark trousers, and turquoise or teal colored contacts. Aelin's assassin era is defined by her eyes — the striking blue-green that no one forgets — and the clean, dangerous all-black.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black fitted bodysuit</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Turquoise / teal colored contacts</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+            <div class="look-card">
+              <div class="look-card-head"><span class="look-name">Full Assassin Build</span><span class="look-level">Weekend project</span></div>
+              <p class="look-desc">Add a face mask or dark half-mask (her disguise), twin short-sword or dagger props, and a fitted tactical jacket. The mask signals the assassin identity — once it's on, the character reads immediately.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🎭</span><span class="btn-label">Dark half-mask / face mask prop</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Twin dagger props</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black tactical jacket</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sub-panel" id="tog-aelin-queen">
+          <div class="look-grid">
+            <div class="look-card">
+              <div class="look-card-head"><span class="look-name">Queen Quick Look</span><span class="look-level">Easy</span></div>
+              <p class="look-desc">Gold or ivory formal gown, a glittering crown, and turquoise contacts. The queen look is warm where the assassin is cold — gold and ember tones throughout, still with those striking turquoise eyes that mark her bloodline.</p>
+              <div class="product-list">
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Gold or ivory formal gown</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Gold glittering crown</span><span class="btn-arrow">→</span></a>
+                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Turquoise colored contacts</span><span class="btn-arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ROWAN ===== -->
+      <div class="char-panel" id="panel-tog-rowan" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon tog">🍃</div>
+          <div class="char-meta">
+            <h3 class="char-title">Rowan Whitethorn</h3>
+            <span class="char-court-tag tog">Fae Warrior · Doranelle</span>
+            <p class="char-desc">Ancient Fae warrior with silver hair, pointed ears, and the kind of stillness that means he is calculating your twelve fastest exits. Forest green and silver throughout, with wind and ice magic that leaves frost in its wake.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Silver wig, dark forest-green tactical clothing, and pointed fae ears. Rowan's look is elemental — he belongs in the forest and dresses like it. The silver hair and pointed ears together read as Fae before anything else registers.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🪄</span><span class="btn-label">Silver / white wig</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🌲</span><span class="btn-label">Forest green tactical jacket</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Warrior Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add a pine-green dramatic cloak, swirling wind-pattern tattoo sleeves (his marks), and a sword prop. The tattoos are his power-bound marks — dark swirling patterns on the forearms and neck.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Forest green hooded cloak</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🌀</span><span class="btn-label">Swirling arm tattoo sleeves</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">⚔️</span><span class="btn-label">Sword prop</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== MANON ===== -->
+      <div class="char-panel" id="panel-tog-manon" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon tog">🐉</div>
+          <div class="char-meta">
+            <h3 class="char-title">Manon Blackbeak</h3>
+            <span class="char-court-tag tog">Witch Queen · Blackbeak Clan</span>
+            <p class="char-desc">White-haired witch leader with iron teeth, iron nails, and the kind of cold beauty that makes you forget she could kill you before you finished the thought. Black robes, pale face, and those retractable iron claws — Manon is one of the most visually dramatic characters in the series.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Long white wig, dramatic black outfit (robes or structured black dress), and pale silvery-white face makeup. Manon's stark white-and-black contrast is her whole identity. Add iron-effect nail tips and the look is complete.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Long straight white wig</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black dramatic robe / dress</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💅</span><span class="btn-label">Long silver / iron nail tips</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Witch Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add pale grey-white face and body paint, golden witch eyes (yellow contacts), and a black leather witch-style hat or crown. Manon's gold eyes are her one warm feature against the cold white-and-black palette — they make the whole look.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🎨</span><span class="btn-label">Pale grey-white face paint</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Gold / amber contacts</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🎩</span><span class="btn-label">Black leather crown / witch hat</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DORIAN ===== -->
+      <div class="char-panel" id="panel-tog-dorian" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon tog">💎</div>
+          <div class="char-meta">
+            <h3 class="char-title">Dorian Havilliard</h3>
+            <span class="char-court-tag tog">King · Adarlan</span>
+            <p class="char-desc">Prince-turned-king with sapphire blue as his dynasty's color, dark hair, and magic that was supposed to be impossible. Charming and tormented in equal measure, Dorian dresses like royalty and fights like someone who learned their power the hard way.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Deep sapphire blue coat or formal jacket, fitted dark trousers, and a silver signet-style ring. Sapphire is the Havilliard dynasty color — anything in that deep blue reads immediately as Dorian to anyone who knows the books.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Sapphire blue formal jacket / coat</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💍</span><span class="btn-label">Silver signet ring</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Fitted dark trousers</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Royal Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add a silver crown, sapphire gem jewelry, and dark shadow-effect body paint on the hands and forearms for his magic. Dorian's shadow magic manifests as darkness that pools from his hands — dark body paint or fingerless black gloves capture this.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Silver crown</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Sapphire gem jewelry set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌑</span><span class="btn-label">Black shadow hand / arm paint</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .char-panels -->
+  </div><!-- end .inner -->
+</section>
+
+<section class="groups-section">
+  <div class="inner">
+    <div class="section-label">Go together</div>
+    <h2 class="section-title">Group &amp; Couples Cosplay</h2>
+    <p class="section-sub">The found family that saved a continent — from the legendary couple to the cadre that changed everything.</p>
+    <div class="group-grid">
+      <div class="group-card">
+        <h3>Aelin &amp; Rowan</h3>
+        <p class="group-desc">The queen and her fated mate. Her gold and turquoise against his silver hair and forest greens create a striking visual contrast — warmth and coldness, fire and wind, exactly as the books describe them.</p>
+        <div class="group-chips">
+          <a class="chip tog" href="#" onclick="switchCharInSeries('tog-aelin');return false;">🌟 Aelin</a>
+          <a class="chip tog" href="#" onclick="switchCharInSeries('tog-rowan');return false;">🍃 Rowan</a>
+        </div>
+        <p class="group-meta">2 people · Gold &amp; turquoise + silver &amp; green</p>
+      </div>
+      <div class="group-card">
+        <h3>The Cadre</h3>
+        <p class="group-desc">Aelin, Rowan, Manon, and Dorian — the core four who carry the endgame. Four very distinct looks that read as a unit: queen gold, warrior silver-green, witch white-black, and royal sapphire.</p>
+        <div class="group-chips">
+          <a class="chip tog" href="#" onclick="switchCharInSeries('tog-aelin');return false;">🌟 Aelin</a>
+          <a class="chip tog" href="#" onclick="switchCharInSeries('tog-rowan');return false;">🍃 Rowan</a>
+          <a class="chip tog" href="#" onclick="switchCharInSeries('tog-manon');return false;">🐉 Manon</a>
+          <a class="chip tog" href="#" onclick="switchCharInSeries('tog-dorian');return false;">💎 Dorian</a>
+        </div>
+        <p class="group-meta">4 people · Mixed palettes · Very recognizable as a group</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- end #series-throne-of-glass -->
+
+<!-- ==================== FOURTH WING ==================== -->
+<div class="series-panel" id="series-fourth-wing">
+<section class="pick-section">
+  <div class="inner">
+    <div class="section-label">Fourth Wing</div>
+    <h2 class="section-title">Pick Your Character</h2>
+    <p class="section-sub">Dragon riders in dark military leathers with lightning-mark tattoos and bond marks that prove who survived. The war college look is earned, never assumed.</p>
+  </div>
+  <div class="char-tabs-wrap">
+    <div class="char-tabs" role="tablist" aria-label="Fourth Wing characters">
+      <button class="char-tab active" data-court="fw" data-char="fw-violet" role="tab" aria-selected="true">Violet</button>
+      <button class="char-tab" data-court="fw" data-char="fw-xaden" role="tab" aria-selected="false">Xaden</button>
+      <button class="char-tab" data-court="fw" data-char="fw-rhiannon" role="tab" aria-selected="false">Rhiannon</button>
+      <button class="char-tab" data-court="fw" data-char="fw-dain" role="tab" aria-selected="false">Dain</button>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="char-panels">
+
+      <!-- ===== VIOLET ===== -->
+      <div class="char-panel active" id="panel-fw-violet" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon fw">📖</div>
+          <div class="char-meta">
+            <h3 class="char-title">Violet Sorrengail</h3>
+            <span class="char-court-tag fw">Dragon Rider · War College</span>
+            <p class="char-desc">Booksmart and physically fragile, she wasn't supposed to survive the war college — and then became one of its most powerful riders. Silver-streaked dark hair, lightning-bolt bond mark tattoos on her forearms, and dark riding leathers that she earned the hard way.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Dark fitted leathers or black base outfit, lightning bolt temporary tattoos on the forearms, and a silver hair streak. The lightning marks are Violet's bond mark tattoos — they appeared when she bonded her dragon. The silver streak is her most distinctive physical feature.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">⚡</span><span class="btn-label">Lightning bolt temporary tattoos</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🪄</span><span class="btn-label">Silver hair streak spray / clip-in</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Dark fitted leathers / jacket</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Rider Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add a dragon rider harness or chest plate prop, arm bracers with lightning detail, and combat boots. The harness signals rider status immediately — dragon riding gear is the visual language of the war college.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon rider chest harness (prop)</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Arm bracers with lightning detail</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== XADEN ===== -->
+      <div class="char-panel" id="panel-fw-xaden" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon fw">🌒</div>
+          <div class="char-meta">
+            <h3 class="char-title">Xaden Riorson</h3>
+            <span class="char-court-tag fw">Dragon Rider · War College</span>
+            <p class="char-desc">The most dangerous rider at the war college, with shadow magic and a rebellion relic mark that covers the left side of his neck and jaw. All black. Always. The rebellion relic is a dark swirling tattoo worn by children of executed rebels — Xaden carries it as a reminder of what was taken and a warning of what he became.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">All black — everything. Dark tactical jacket, black combat trousers, black boots. Add a rebellion relic temporary tattoo on the left side of the neck: a dark, swirling intricate mark that creeps up toward the jaw. Without it, it's just black clothes. With it, it's unmistakably Xaden.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🌑</span><span class="btn-label">Swirling neck / jaw temp tattoo</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black tactical jacket</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Shadow Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add dark shadow body paint on the hands and forearms (his shadow magic manifests there), a black dragon rider harness, and a dark cloak. The shadow effect on the hands is the visual signature of his power — dark paint that fades toward the wrists.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💀</span><span class="btn-label">Black shadow hand / arm body paint</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon rider harness (prop)</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Long dark cloak</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RHIANNON ===== -->
+      <div class="char-panel" id="panel-fw-rhiannon" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon fw">🌻</div>
+          <div class="char-meta">
+            <h3 class="char-title">Rhiannon Matthias</h3>
+            <span class="char-court-tag fw">Dragon Rider · War College</span>
+            <p class="char-desc">Violet's closest friend and one of the most naturally gifted riders in their year. Warm earth tones, a grounded confidence, and braided dark hair. Rhiannon is the emotional anchor in a brutal world — her look is approachable and real, not dramatic.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easiest</span></div>
+            <p class="look-desc">Brown leather jacket or vest over a warm-toned base outfit, braided hair with a simple leather cord, and copper or amber jewelry. Rhiannon's look is warm and grounded — earthy colors that contrast with the sharper aesthetics of the other riders.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🤎</span><span class="btn-label">Brown leather jacket or vest</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Copper / amber jewelry set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🪢</span><span class="btn-label">Leather hair cord / braid wrap</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Rider Build</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Add earth-tone arm bracers, riding gloves, and a rider harness prop in brown leather. The earth magic aesthetic comes through in the warm, natural material choices — nothing synthetic, nothing shiny.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Brown leather arm bracers</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🧤</span><span class="btn-label">Leather riding gloves</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Brown rider harness (prop)</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DAIN ===== -->
+      <div class="char-panel" id="panel-fw-dain" role="tabpanel">
+        <div class="char-header">
+          <div class="char-icon fw">🛡️</div>
+          <div class="char-meta">
+            <h3 class="char-title">Dain Aetos</h3>
+            <span class="char-court-tag fw">Squad Leader · War College</span>
+            <p class="char-desc">Squad leader and tactical mind, by-the-book with precision that borders on rigidity. Military uniform aesthetic — structured, precise, every detail correct. Dain's look is the war college at its most formal, brown and gold with the bearing of someone who has never once been late.</p>
+          </div>
+        </div>
+        <div class="look-grid">
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
+            <p class="look-desc">Military-cut brown jacket with structured shoulders, dark fitted trousers, and gold command insignia pin. Dain's look is structured precision — squared collar, nothing out of place. The insignia marks his rank.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🟫</span><span class="btn-label">Military-cut brown / khaki jacket</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🏅</span><span class="btn-label">Gold command insignia pin</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Dark fitted uniform trousers</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+          <div class="look-card">
+            <div class="look-card-head"><span class="look-name">Full Commander Build</span><span class="look-level">Weekend project</span></div>
+            <p class="look-desc">Add a structured rider harness over the jacket, combat boots, and a full military rank badge display. Dain's full look is the war college dress uniform taken seriously — every piece earned, every detail intentional.</p>
+            <div class="product-list">
+              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Rider harness (prop)</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🎖️</span><span class="btn-label">Military rank badge set</span><span class="btn-arrow">→</span></a>
+              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .char-panels -->
+  </div><!-- end .inner -->
+</section>
+
+<section class="groups-section">
+  <div class="inner">
+    <div class="section-label">Go together</div>
+    <h2 class="section-title">Group &amp; Couples Cosplay</h2>
+    <p class="section-sub">The riders who survived together. The couple whose bond defied everything. These are the combinations that fans recognize immediately.</p>
+    <div class="group-grid">
+      <div class="group-card">
+        <h3>Violet &amp; Xaden</h3>
+        <p class="group-desc">The silver-streaked bookworm with lightning marks and the all-black shadow rider with his rebellion relic tattoo. Together they are a study in contrast — her reluctant power against his controlled danger. The most recognized pairing in the series.</p>
+        <div class="group-chips">
+          <a class="chip fw" href="#" onclick="switchCharInSeries('fw-violet');return false;">📖 Violet</a>
+          <a class="chip fw" href="#" onclick="switchCharInSeries('fw-xaden');return false;">🌒 Xaden</a>
+        </div>
+        <p class="group-meta">2 people · Silver streak + lightning vs. all black + rebellion relic</p>
+      </div>
+      <div class="group-card">
+        <h3>The War College Riders</h3>
+        <p class="group-desc">Violet, Xaden, Rhiannon, and Dain — the core four from the war college. Four distinct looks that read as a unit: silver lightning, all-black shadow, warm earth tones, and military precision.</p>
+        <div class="group-chips">
+          <a class="chip fw" href="#" onclick="switchCharInSeries('fw-violet');return false;">📖 Violet</a>
+          <a class="chip fw" href="#" onclick="switchCharInSeries('fw-xaden');return false;">🌒 Xaden</a>
+          <a class="chip fw" href="#" onclick="switchCharInSeries('fw-rhiannon');return false;">🌻 Rhiannon</a>
+          <a class="chip fw" href="#" onclick="switchCharInSeries('fw-dain');return false;">🛡️ Dain</a>
+        </div>
+        <p class="group-meta">4 people · Mixed aesthetics · Dark leathers throughout</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- end #series-fourth-wing -->
+
 <!-- ==================== TIPS ==================== -->
 <section class="tips-section">
   <div class="inner">
     <div class="section-label">Before you shop</div>
-    <h2 class="section-title">Tips for ACOTAR Cosplay</h2>
-    <p class="section-sub">Four questions that determine which direction to build from.</p>
+    <h2 class="section-title">Tips for Fantasy Cosplay</h2>
+    <p class="section-sub">Four things that determine whether a costume reads from across the room or only close up.</p>
     <div class="tips-grid">
       <div class="tip-card">
         <div class="tip-num">01</div>
@@ -1200,8 +1884,8 @@ footer a:hover { color: var(--night-soft); }
       </div>
       <div class="tip-card">
         <div class="tip-num">02</div>
-        <h3 class="tip-title">Court color reads from a distance</h3>
-        <p class="tip-text">If the specific pieces aren't in budget, lean on court palette: Night Court characters wear deep black, purple, and silver. Spring Court runs in forest greens and spring gold. Autumn Court is copper, rust, and amber. Color-coding reads before anyone sees a prop or detail.</p>
+        <h3 class="tip-title">Series palette reads from a distance</h3>
+        <p class="tip-text">If specific pieces aren't in budget, lean on the series color language. ACOTAR Night Court: black, purple, silver. Spring Court: forest green and gold. Crescent City: deep city blues and warm amber. Throne of Glass: ember gold and forest green. Fourth Wing: dark military brown and black with lightning accents. Color-coding works before anyone sees a prop.</p>
       </div>
       <div class="tip-card">
         <div class="tip-num">03</div>
@@ -1222,7 +1906,7 @@ footer a:hover { color: var(--night-soft); }
 <footer>
   <div class="inner">
     <p>A Court of Cosplay &mdash; an unofficial fan guide</p>
-    <p>This site is not affiliated with, endorsed by, or sponsored by Sarah J. Maas, Bloomsbury Publishing, or Fireheart Inc. Character names, series titles, and related marks including <em>A Court of Thorns and Roses</em>, Feyre, and others are trademarks or intellectual property of Fireheart Inc. and their respective owners. This site refers to those works by name solely to identify the characters being cosplayed (nominative fair use) and makes no claim of ownership or affiliation.</p>
+    <p>This site is not affiliated with, endorsed by, or sponsored by Sarah J. Maas, Bloomsbury Publishing, Fireheart Inc., Rebecca Yarros, or Yarros Ink, Inc. Character names, series titles, and related marks are trademarks or intellectual property of their respective owners including Fireheart Inc. (<em>A Court of Thorns and Roses</em>, Crescent City, Throne of Glass series) and Yarros Ink, Inc. (<em>Fourth Wing</em> series). This site refers to those works by name solely to identify the characters being cosplayed (nominative fair use) and makes no claim of ownership or affiliation.</p>
     <p style="margin-top: 6px;">As an Amazon Associate I earn from qualifying purchases. Product links on this site are affiliate links — at no extra cost to you.</p>
   </div>
 </footer>
@@ -1252,25 +1936,56 @@ themeBtn.addEventListener('click', () => {
   try { localStorage.setItem('prythian-theme', isDark ? 'dark' : 'light'); } catch(e) {}
 });
 
-// ---- Character tab switching ----
-const charTabs = document.querySelectorAll('.char-tab');
-const charPanels = document.querySelectorAll('.char-panel');
+// ---- Series tab switching ----
+const seriesTabs = document.querySelectorAll('.series-tab');
+const seriesPanels = document.querySelectorAll('.series-panel');
 
-function switchTo(charId) {
-  charTabs.forEach(t => {
+function switchSeries(seriesId) {
+  seriesTabs.forEach(t => {
+    const active = t.dataset.series === seriesId;
+    t.classList.toggle('active', active);
+    t.setAttribute('aria-selected', String(active));
+  });
+  seriesPanels.forEach(p => p.classList.toggle('active', p.id === 'series-' + seriesId));
+  document.querySelector('.series-nav')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+seriesTabs.forEach(tab => {
+  tab.addEventListener('click', () => switchSeries(tab.dataset.series));
+});
+
+// ---- Character tab switching (scoped to active series panel) ----
+document.querySelectorAll('.char-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const seriesPanel = tab.closest('.series-panel');
+    seriesPanel.querySelectorAll('.char-tab').forEach(t => {
+      const active = t === tab;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', String(active));
+    });
+    seriesPanel.querySelectorAll('.char-panel').forEach(p =>
+      p.classList.toggle('active', p.id === 'panel-' + tab.dataset.char));
+  });
+});
+
+// Helper for group chip clicks — scoped to active series
+function switchCharInSeries(charId) {
+  const activePanel = document.querySelector('.series-panel.active');
+  if (!activePanel) return;
+  activePanel.querySelectorAll('.char-tab').forEach(t => {
     const active = t.dataset.char === charId;
     t.classList.toggle('active', active);
     t.setAttribute('aria-selected', String(active));
   });
-  charPanels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + charId));
-  document.querySelector('.char-tabs-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  activePanel.querySelectorAll('.char-panel').forEach(p =>
+    p.classList.toggle('active', p.id === 'panel-' + charId));
+  activePanel.querySelector('.char-tabs-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-charTabs.forEach(tab => {
-  tab.addEventListener('click', () => switchTo(tab.dataset.char));
-});
+// Legacy switchTo for ACOTAR group chips
+function switchTo(charId) { switchCharInSeries(charId); }
 
-// ---- Feyre sub-tabs ----
+// ---- Sub-tabs (Feyre + Aelin) ----
 document.querySelectorAll('.look-sub-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const panel = tab.closest('.char-panel');
