@@ -688,6 +688,35 @@ footer a:hover { color: var(--night-soft); }
   .char-title { font-size: 1.35rem; }
   .look-grid { grid-template-columns: 1fr; }
   .char-tab { padding: 11px 12px; font-size: 0.68rem; }
+  .series-tab { padding: 11px 14px; font-size: 0.68rem; }
+
+  /* Look cards: hide prose, surface buttons as the primary CTA */
+  .look-card { padding: 14px; }
+  .look-desc { display: none; }
+  .look-level { display: none; }
+  .look-card-head { margin-bottom: 12px; }
+  .look-name { font-size: 0.78rem; }
+
+  /* Product buttons: larger tap target */
+  .product-btn { padding: 12px 14px; font-size: 0.92rem; }
+  .btn-icon { width: 32px; height: 32px; font-size: 0.95rem; }
+  .btn-arrow { font-size: 0.75rem; color: var(--fg-muted); }
+
+  /* Character header: clamp bio to 2 lines */
+  .char-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .char-icon { width: 48px; height: 48px; font-size: 1.1rem; }
+  .char-header { gap: 12px; margin-bottom: 20px; }
+
+  /* Group cards: chips are the CTA, prose hidden */
+  .group-card { padding: 14px; }
+  .group-desc { display: none; }
+  .group-meta { display: none; }
+  .group-card h3 { margin-bottom: 10px; font-size: 0.88rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
