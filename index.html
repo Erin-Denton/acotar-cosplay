@@ -868,6 +868,13 @@ footer a:hover { color: var(--night-soft); }
 @media (max-width: 600px) {
   .series-tab { padding: 11px 14px; font-size: 0.68rem; }
 }
+
+/* WIP — hidden until content is ready; direct links (#throne-of-glass,
+   #fourth-wing) still work. Remove these rules to re-enable the tabs. */
+.series-tab[data-series="throne-of-glass"],
+.series-tab[data-series="fourth-wing"],
+.court-badge.cb-tog,
+.court-badge.cb-fw { display: none; }
 </style>
 </head>
 <body>
@@ -891,7 +898,7 @@ footer a:hover { color: var(--night-soft); }
   <div class="inner">
     <div class="hero-eyebrow">Unofficial Fan Cosplay Guide · Fantasy Book Series</div>
     <h1>Step Into the <em>World</em></h1>
-    <p class="hero-sub">Character-by-character costume guides for ACOTAR, Crescent City, Throne of Glass, and Fourth Wing. Find the pieces. Pick your character.</p>
+    <p class="hero-sub">Character-by-character costume guides for ACOTAR and Crescent City. Find the pieces. Pick your character.</p>
     <div class="court-badges">
       <span class="court-badge cb-night">✦ ACOTAR</span>
       <span class="court-badge cb-cc">◈ Crescent City</span>
