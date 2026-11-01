@@ -12,7 +12,8 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-ZJJSM50YCY');
+  // send_page_view: false — we fire all pageviews manually for SPA accuracy
+  gtag('config', 'G-ZJJSM50YCY', { send_page_view: false });
 </script>
 <link rel="stylesheet" href="starfall-sky.css">
 
@@ -2052,6 +2053,9 @@ function gaEvent(name, params) {
   if (typeof gtag === 'function') gtag('event', name, params);
 }
 
+// Tracks previous URL so GA4 receives page_referrer on every virtual pageview
+let prevUrl = location.href;
+
 function switchSeries(seriesId, { pushState = true, track = true } = {}) {
   if (!SERIES_TITLES[seriesId]) return;
 
@@ -2068,14 +2072,17 @@ function switchSeries(seriesId, { pushState = true, track = true } = {}) {
     history.pushState({ series: seriesId }, '', '#' + seriesId);
   }
 
-  // Fire a virtual pageview so GA4 treats each series as its own page
+  // Fire a virtual pageview so GA4 treats each series as its own page.
+  // page_path omitted — GA4 derives it from page_location (page_path is a UA leftover).
   if (track) {
     gaEvent('page_view', {
       page_title:    SERIES_TITLES[seriesId] + ' – A Court of Cosplay',
       page_location: location.origin + location.pathname + '#' + seriesId,
-      page_path:     location.pathname + '#' + seriesId,
+      page_referrer: prevUrl,
     });
   }
+
+  prevUrl = location.origin + location.pathname + '#' + seriesId;
 }
 
 // Handle browser back / forward
@@ -2084,9 +2091,17 @@ window.addEventListener('popstate', e => {
   if (SERIES_TITLES[id]) switchSeries(id, { pushState: false });
 });
 
-// Land on the series in the URL hash on first load
+// Fire the initial pageview manually — required because send_page_view: false
+// suppresses GA4's automatic one. Also lands on the hash series if deep-linked.
 (function applyHashOnLoad() {
-  const id = location.hash.replace('#', '');
+  const id    = location.hash.replace('#', '');
+  const title = SERIES_TITLES[id]
+    ? SERIES_TITLES[id] + ' – A Court of Cosplay'
+    : 'A Court of Cosplay';
+  gaEvent('page_view', {
+    page_title:    title,
+    page_location: location.href,
+  });
   if (SERIES_TITLES[id]) {
     switchSeries(id, { pushState: false, track: false });
   }
