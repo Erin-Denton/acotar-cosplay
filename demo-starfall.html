@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Starfall Demo — A Court of Cosplay</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="starfall-sky.css">
+<style>
+  :root {
+    --fg:       #ece5f8;
+    --fg-muted: #a090c0;
+    --card:     rgba(23, 16, 58, 0.72);
+    --border:   rgba(80, 50, 150, 0.35);
+    --night:    #8860c8;
+    --gold:     #c8a050;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    /* Sky background is painted by canvas; this is only the fallback */
+    background: #0b0f2a;
+    color: var(--fg);
+    font-family: 'EB Garamond', Georgia, serif;
+    min-height: 100vh;
+    padding: max(24px, env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) 60px max(20px, env(safe-area-inset-left, 0px));
+  }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero {
+    text-align: center;
+    padding: 80px 20px 64px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 18px;
+    text-shadow: 0 0 40px rgba(136,96,200,0.6);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--night);
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--fg-muted);
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  .hint {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200,160,80,0.65);
+    border: 1px solid rgba(200,160,80,0.20);
+    border-radius: 20px;
+    padding: 7px 16px;
+    animation: hint-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes hint-pulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1;   }
+  }
+
+  /* ── Cards grid ───────────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    max-width: 900px;
+    margin: 0 auto 60px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+
+  .card h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--fg);
+  }
+
+  .card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--fg-muted);
+  }
+
+  /* ── CTA link (interactive — no shooting star on click) ── */
+  .cta {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--night);
+    border: 1px solid var(--night);
+    border-radius: 6px;
+    padding: 10px 22px;
+    margin-top: 14px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .cta:hover {
+    background: rgba(136,96,200,0.15);
+    color: #b090e0;
+  }
+
+  /* ── Config note ──────────────────────────────────────── */
+  .note {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px;
+    background: rgba(30, 20, 60, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .note h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-bottom: 14px;
+    letter-spacing: 0.06em;
+  }
+
+  .note ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .note li {
+    font-size: 0.9rem;
+    color: var(--fg-muted);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .note li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--night);
+    font-size: 0.6rem;
+    top: 5px;
+  }
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.82em;
+    background: rgba(136,96,200,0.12);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: #c0a8f0;
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <p class="eyebrow">starfall demo · a court of cosplay</p>
+    <h1>The <em>Night Court</em> Sky</h1>
+    <p>Click anywhere on the page to shoot a star. Every 20 seconds a Starfall shower fills the sky. Links and buttons still work normally.</p>
+    <span class="hint">✦ Click the night sky to shoot a star ✦</span>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">🌹</div>
+      <h2>Ambient Starfield</h2>
+      <p>150–200 stars across three depth layers with sine-wave twinkle (3–8 s per cycle). Bright near-layer stars occasionally flash a four-point sparkle glint.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🖱️</div>
+      <h2>Cursor Parallax</h2>
+      <p>Move your mouse across the screen — far stars drift 1 px, near stars up to 6 px. Stars within 120 px of the cursor brighten by 20%.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💫</div>
+      <h2>Click-to-Shoot</h2>
+      <p>Tap or click anywhere (except links &amp; buttons) to fire a shooting star through that exact point. Up to 3 can streak at once; nearby stars flare in the wake.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌠</div>
+      <h2>Starfall Event</h2>
+      <p>Every 20 s, 10–16 stars shower across the upper sky in a shared direction. The sky brightens with a violet wash, then ends in a sparkle wave.</p>
+      <a class="cta" href="index.html">← Back to the guide</a>
+    </div>
+  </div>
+
+  <div class="note">
+    <h3>Most-Tweaked CONFIG Values</h3>
+    <ul>
+      <li><code>STARFALL_INTERVAL</code> — seconds between showers. Default <code>20</code>; set lower to see events faster.</li>
+      <li><code>STAR_COUNT_BASE</code> — stars at 1920×1080. Scales by screen area; raise for denser skies.</li>
+      <li><code>TWINKLE_PERIOD_MIN / MAX</code> — how slowly stars breathe (seconds). Wider range = more variety.</li>
+      <li><code>PARALLAX_NEAR</code> — max px shift for front-layer stars. <code>0</code> disables parallax entirely.</li>
+      <li><code>SHOOT_MAX</code> — concurrent shooting stars on click. Set to <code>0</code> to disable click-to-shoot.</li>
+      <li><code>NEBULA_OPACITY</code> — corner haze intensity. <code>0</code> removes the nebula.</li>
+      <li><code>BG_TOP / BG_BOTTOM</code> — the gradient stops of the sky itself.</li>
+    </ul>
+  </div>
+
+<script src="starfall-sky.js"></script>
+</body>
+</html>

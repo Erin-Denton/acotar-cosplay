@@ -1,0 +1,12 @@
+/* starfall-sky.css
+ * Positions the canvas behind all page content.
+ * No other styles needed — the JS draws the background.
+ */
+
+#starfall-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
