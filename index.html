@@ -767,6 +767,12 @@ footer a:hover { color: var(--night-soft); }
   .btn-label { font-size: 0.95rem; }
   .btn-arrow { font-size: 0.8rem; color: var(--fg-muted); }
 
+  /* Multi-option toggle — same tap target as product-btn */
+  .product-toggle { padding: 14px 14px; font-size: 0.95rem; gap: 12px; border-color: var(--border-hi); }
+  .opt-count { font-size: 0.75rem; }
+  .options-list { margin-left: 10px; padding-left: 10px; }
+  .option-link { padding: 12px 14px; font-size: 0.92rem; }
+
   /* Group cards */
   .group-card { padding: 14px; }
   .group-card h3 { font-size: 0.9rem; margin-bottom: 10px; }
@@ -856,6 +862,97 @@ footer a:hover { color: var(--night-soft); }
 .product-btn.pcc  .btn-icon { background: var(--cc-bg); }
 .product-btn.ptog .btn-icon { background: var(--tog-bg); }
 .product-btn.pfw  .btn-icon { background: var(--fw-bg); }
+
+/* ---- Multi-option expandable product items ---- */
+.product-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg);
+  font-size: 0.88rem;
+  font-family: 'EB Garamond', serif;
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.product-toggle:hover,
+.product-toggle[aria-expanded="true"] {
+  background: var(--card-hover);
+  border-color: var(--border-hi);
+}
+.product-item.pn   .product-toggle .btn-icon { background: var(--night-bg); }
+.product-item.ps   .product-toggle .btn-icon { background: var(--spring-bg); }
+.product-item.pa   .product-toggle .btn-icon { background: var(--autumn-bg); }
+.product-item.pr   .product-toggle .btn-icon { background: var(--rose-bg); }
+.product-item.pg   .product-toggle .btn-icon { background: var(--gold-bg); }
+.product-item.pcc  .product-toggle .btn-icon { background: var(--cc-bg); }
+.product-item.ptog .product-toggle .btn-icon { background: var(--tog-bg); }
+.product-item.pfw  .product-toggle .btn-icon { background: var(--fw-bg); }
+
+.opt-count {
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--fg-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.toggle-chevron {
+  font-size: 0.7rem;
+  color: var(--fg-dim);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.product-toggle[aria-expanded="true"] .toggle-chevron {
+  transform: rotate(90deg);
+}
+
+.options-list {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 14px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+}
+.options-list.open { display: flex; }
+
+.option-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-family: 'EB Garamond', serif;
+  transition: background 0.15s, border-color 0.15s;
+}
+.option-link:hover {
+  background: var(--card-hover);
+  border-color: var(--border-hi);
+  color: var(--fg);
+}
+.opt-label { flex: 1; min-width: 0; }
+.opt-arrow { font-size: 0.65rem; color: var(--fg-dim); flex-shrink: 0; }
 
 .look-sub-tab.cc.active  { color: var(--cc-soft);  border-color: var(--cc);  background: var(--cc-bg); }
 .look-sub-tab.tog.active { color: var(--tog-soft); border-color: var(--tog); background: var(--tog-bg); }
@@ -1035,7 +1132,21 @@ footer a:hover { color: var(--night-soft); }
               </div>
               <p class="look-desc">A plain white or pale grey shift dress — deliberately simple, deliberately stripped of color. Feyre Under the Mountain is a mortal among Fae, stripped of everything. Add bare feet or simple flats and a haunted expression.</p>
               <div class="product-list">
-                <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🩱</span><span class="btn-label">White / pale linen shift dress</span><span class="btn-arrow">→</span></a>
+                <div class="product-item">
+                  <button class="product-toggle" aria-expanded="false">
+                    <span class="btn-icon">🩱</span>
+                    <span class="btn-label">White / pale shift dress</span>
+                    <span class="opt-count">5 options</span>
+                    <span class="toggle-chevron">›</span>
+                  </button>
+                  <div class="options-list">
+                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 1</span><span class="opt-arrow">→</span></a>
+                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 2</span><span class="opt-arrow">→</span></a>
+                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 3</span><span class="opt-arrow">→</span></a>
+                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 4</span><span class="opt-arrow">→</span></a>
+                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 5</span><span class="opt-arrow">→</span></a>
+                  </div>
+                </div>
                 <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🪡</span><span class="btn-label">Fake blood or dirt makeup (optional)</span><span class="btn-arrow">→</span></a>
                 <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🔗</span><span class="btn-label">Thin chain bracelet / cuff prop</span><span class="btn-arrow">→</span></a>
               </div>
@@ -2191,6 +2302,15 @@ document.querySelectorAll('.look-sub-tab').forEach(tab => {
   });
 });
 
+// ---- Multi-option product toggle ----
+document.querySelectorAll('.product-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    toggle.nextElementSibling.classList.toggle('open', !expanded);
+  });
+});
+
 // ---- Product link click tracking ----
 // Fires a GA4 event with series + character context whenever a
 // real affiliate link (not a placeholder #) is clicked.
@@ -2200,9 +2320,25 @@ document.querySelectorAll('.product-btn[href]').forEach(btn => {
     const seriesPanel = btn.closest('.series-panel');
     const charPanel   = btn.closest('.char-panel');
     gaEvent('product_click', {
-      series:   seriesPanel?.id?.replace('series-', '') ?? '',
+      series:    seriesPanel?.id?.replace('series-', '') ?? '',
       character: charPanel?.id?.replace('panel-', '') ?? '',
-      product:  btn.textContent.trim().replace(/\s+/g, ' ').slice(0, 100),
+      product:   btn.textContent.trim().replace(/\s+/g, ' ').slice(0, 100),
+    });
+  });
+});
+
+// Track individual option-link clicks (multi-option items)
+document.querySelectorAll('.option-link[href]').forEach(link => {
+  link.addEventListener('click', () => {
+    if (link.getAttribute('href') === '#') return;
+    const seriesPanel = link.closest('.series-panel');
+    const charPanel   = link.closest('.char-panel');
+    const itemLabel   = link.closest('.product-item')?.querySelector('.btn-label')?.textContent.trim().replace(/\s+/g, ' ').slice(0, 100) ?? '';
+    gaEvent('product_click', {
+      series:    seriesPanel?.id?.replace('series-', '') ?? '',
+      character: charPanel?.id?.replace('panel-', '') ?? '',
+      product:   link.querySelector('.opt-label')?.textContent.trim().replace(/\s+/g, ' ').slice(0, 100) ?? '',
+      item:      itemLabel,
     });
   });
 });
