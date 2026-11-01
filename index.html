@@ -6,6 +6,14 @@
 <title>A Court of Cosplay</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌙</text></svg>">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,opsz,wght@0,6..144,400;0,6..144,500;1,6..144,400&display=swap">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJJSM50YCY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJJSM50YCY');
+</script>
 <link rel="stylesheet" href="starfall-sky.css">
 
 <style>
@@ -2025,11 +2033,28 @@ themeBtn.addEventListener('click', () => {
   try { localStorage.setItem('prythian-theme', isDark ? 'dark' : 'light'); } catch(e) {}
 });
 
-// ---- Series tab switching ----
-const seriesTabs = document.querySelectorAll('.series-tab');
+// ---- Series routing + Analytics ----
+// Each series is tracked as a distinct virtual page in GA4.
+// The URL hash (#acotar, #crescent-city, etc.) makes series
+// deep-linkable and back/forward navigable.
+
+const seriesTabs   = document.querySelectorAll('.series-tab');
 const seriesPanels = document.querySelectorAll('.series-panel');
 
-function switchSeries(seriesId) {
+const SERIES_TITLES = {
+  'acotar':          'A Court of Thorns & Roses',
+  'crescent-city':   'Crescent City',
+  'throne-of-glass': 'Throne of Glass',
+  'fourth-wing':     'Fourth Wing',
+};
+
+function gaEvent(name, params) {
+  if (typeof gtag === 'function') gtag('event', name, params);
+}
+
+function switchSeries(seriesId, { pushState = true, track = true } = {}) {
+  if (!SERIES_TITLES[seriesId]) return;
+
   seriesTabs.forEach(t => {
     const active = t.dataset.series === seriesId;
     t.classList.toggle('active', active);
@@ -2037,7 +2062,35 @@ function switchSeries(seriesId) {
   });
   seriesPanels.forEach(p => p.classList.toggle('active', p.id === 'series-' + seriesId));
   document.querySelector('.series-nav')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // Update URL hash so each series has a shareable, bookmarkable URL
+  if (pushState) {
+    history.pushState({ series: seriesId }, '', '#' + seriesId);
+  }
+
+  // Fire a virtual pageview so GA4 treats each series as its own page
+  if (track) {
+    gaEvent('page_view', {
+      page_title:    SERIES_TITLES[seriesId] + ' – A Court of Cosplay',
+      page_location: location.origin + location.pathname + '#' + seriesId,
+      page_path:     location.pathname + '#' + seriesId,
+    });
+  }
 }
+
+// Handle browser back / forward
+window.addEventListener('popstate', e => {
+  const id = e.state?.series ?? location.hash.replace('#', '');
+  if (SERIES_TITLES[id]) switchSeries(id, { pushState: false });
+});
+
+// Land on the series in the URL hash on first load
+(function applyHashOnLoad() {
+  const id = location.hash.replace('#', '');
+  if (SERIES_TITLES[id]) {
+    switchSeries(id, { pushState: false, track: false });
+  }
+})();
 
 seriesTabs.forEach(tab => {
   tab.addEventListener('click', () => switchSeries(tab.dataset.series));
@@ -2054,6 +2107,12 @@ document.querySelectorAll('.char-tab').forEach(tab => {
     });
     seriesPanel.querySelectorAll('.char-panel').forEach(p =>
       p.classList.toggle('active', p.id === 'panel-' + tab.dataset.char));
+
+    // Track which character the visitor viewed
+    gaEvent('view_character', {
+      series:    seriesPanel.id.replace('series-', ''),
+      character: tab.dataset.char,
+    });
   });
 });
 
@@ -2082,6 +2141,22 @@ document.querySelectorAll('.look-sub-tab').forEach(tab => {
     panel.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById(tab.dataset.sub)?.classList.add('active');
+  });
+});
+
+// ---- Product link click tracking ----
+// Fires a GA4 event with series + character context whenever a
+// real affiliate link (not a placeholder #) is clicked.
+document.querySelectorAll('.product-btn[href]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (btn.getAttribute('href') === '#') return; // skip placeholders
+    const seriesPanel = btn.closest('.series-panel');
+    const charPanel   = btn.closest('.char-panel');
+    gaEvent('product_click', {
+      series:   seriesPanel?.id?.replace('series-', '') ?? '',
+      character: charPanel?.id?.replace('panel-', '') ?? '',
+      product:  btn.textContent.trim().replace(/\s+/g, ' ').slice(0, 100),
+    });
   });
 });
 </script>
