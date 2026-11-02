@@ -4,6 +4,33 @@ A static ACOTAR cosplay catalog, with editorial content managed in Airtable and 
 
 **The website reads a generated JSON snapshot. It does not call Airtable from the browser.** JavaScript imports published Airtable records during a local refresh or GitHub Actions build. No Python server or hosted database server is required.
 
+## how to get airtable data to populate site
+
+### Publish complete entries in Airtable
+
+For a product to appear, set **the Product, its linked Look, and that Look's Character** to **Published**. The Product needs a nonblank **Title** and valid **Affiliate URL**; the Look and Character need names and valid linked-record relationships. Draft, incomplete, and empty entries stay hidden. Publishing only the Product is not enough.
+
+### Update the live website
+
+The [live site](https://erin-denton.github.io/acotar-cosplay/) imports Airtable data during each successful GitHub Pages deployment. Airtable edits do not appear immediately.
+
+- **Automatic:** the workflow runs every six hours, at 00:17, 06:17, 12:17, and 18:17 UTC. GitHub may delay scheduled runs. Allow a few minutes for the build and deployment to finish.
+- **Update sooner:** open [Actions → Publish Airtable site](https://github.com/Erin-Denton/acotar-cosplay/actions/workflows/pages.yml), click **Run workflow**, select **main**, then click **Run workflow** again.
+- **Code updates:** a push to `main` also imports the latest Airtable data and deploys the site.
+
+Wait for both the build and deployment to succeed, then reload the live website. If a run fails, the previous live version stays available. The Airtable token is stored privately in GitHub's encrypted repository secret; visitors do not need a token.
+
+### Update your local copy
+
+The local preview does **not** update automatically when Airtable changes. With the preview running, open a second terminal and paste:
+
+```sh
+cd /Users/erindenton/Documents/GitHub/acotar-cosplay
+./scripts/local.sh refresh
+```
+
+Wait for `Static site built in dist/ using fresh Airtable data.`, then reload **http://127.0.0.1:8765/**. No preview restart is needed. On another machine with Node.js and the local token configured, run `npm run refresh` from the repository folder instead. See [Refresh the local copy from Airtable](#refresh-the-local-copy-from-airtable) for initial token setup.
+
 ## Connect Airtable to GitHub Pages
 
 This is the implementation path for the hosted site:
