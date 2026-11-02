@@ -1,0 +1,34 @@
+.catalog-message { padding: 35px 0 60px; color: var(--fg-muted); }
+.catalog-message button { margin-left: 12px; padding: 8px 14px; cursor: pointer; }
+.product-copy { display: block; }
+.product-description, .product-metadata { display: block; margin-top: 5px; font-size: .9rem; color: var(--fg-muted); white-space: pre-line; }
+.product-btn { align-items: flex-start; padding: 14px; }
+.product-btn .btn-arrow { align-self: center; }
+.look-description { margin: 12px 0; color: var(--fg-muted); white-space: pre-line; }
+.look-heading { margin: 16px 0; font-size: 1.2rem; }
+.char-desc { white-space: pre-line; }
+[hidden] { display: none !important; }
+
+.product-list .product-btn { align-items: center; gap: 16px; }
+.product-thumbnail { position: relative; width: 100px; height: 100px; flex: 0 0 100px; overflow: hidden; border-radius: 6px; background: #fff; border: 1px solid var(--border); box-sizing: border-box; }
+.product-image { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.product-image-fallback { display: flex; position: absolute; inset: 0; align-items: center; justify-content: center; font-size: 1.75rem; color: #555; }
+@media (max-width: 400px) { .product-list .product-btn { padding: 10px; gap: 10px; } }
+
+/* Product cards: three across on desktop, two on tablets, one on phones. */
+.product-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.product-list .product-btn { position: relative; flex-direction: column; align-items: flex-start; gap: 14px; min-width: 0; padding: 18px; }
+.product-list .btn-label { flex: 1; width: 100%; overflow-wrap: anywhere; }
+.product-list .product-copy { font-size: 1.05rem; line-height: 1.4; }
+.product-list .btn-arrow { position: absolute; top: 20px; right: 18px; font-size: 1rem; }
+@media (max-width: 900px) { .product-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .product-list { grid-template-columns: minmax(0, 1fr); } }
+
+/* The whole card remains one accessible shopping link. */
+.product-list .product-btn { align-items: center; text-align: center; }
+.product-buy-pill { display: inline-flex; align-items: center; justify-content: center; margin-top: auto; padding: 9px 18px; border: 1px solid var(--night); border-radius: 999px; background: var(--night-bg); color: var(--night-soft); font-family: 'Cinzel', serif; font-size: .7rem; letter-spacing: .06em; line-height: 1.4; transition: background .2s, border-color .2s; }
+.product-btn:hover .product-buy-pill, .product-btn:focus-visible .product-buy-pill { background: var(--card-hover); border-color: var(--night-soft); }
+.product-list .product-btn:focus-visible { outline: 2px solid var(--night-soft); outline-offset: 3px; }
+
+.look-section + .look-section { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--border); }
+.look-section .look-heading { margin: 0 0 18px; }
