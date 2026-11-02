@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,86 +60,6 @@
   --shadow-sm:    0 1px 4px rgba(0,0,0,0.5);
   --shadow-md:    0 4px 16px rgba(0,0,0,0.55);
   color-scheme: dark;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg:         #f0ebfa;
-    --surface:    #e6dff5;
-    --card:       #ffffff;
-    --card-hover: #f5f0ff;
-    --border:     #cdbfec;
-    --border-hi:  #b0a0e0;
-    --fg:         #160c2e;
-    --fg-muted:   #5a4880;
-    --fg-dim:     #9880c0;
-    --night:      #5c3ea0;
-    --night-soft: #8060c8;
-    --night-bg:   rgba(92,62,160,0.1);
-    --spring:     #3a7040;
-    --spring-soft:#5a9060;
-    --spring-bg:  rgba(58,112,64,0.1);
-    --autumn:     #a05818;
-    --autumn-soft:#c07838;
-    --autumn-bg:  rgba(160,88,24,0.1);
-    --rose:       #a03060;
-    --rose-bg:    rgba(160,48,96,0.1);
-    --gold:       #9a7820;
-    --gold-soft:  #c09840;
-    --gold-bg:    rgba(154,120,32,0.1);
-    --silver:     #507090;
-    --cc:         #2a5ab8;
-    --cc-soft:    #5080d8;
-    --cc-bg:      rgba(42,90,184,0.1);
-    --tog:        #a05820;
-    --tog-soft:   #c07840;
-    --tog-bg:     rgba(160,88,32,0.1);
-    --fw:         #902020;
-    --fw-soft:    #b04040;
-    --fw-bg:      rgba(144,32,32,0.1);
-    --shadow-sm:  0 1px 4px rgba(0,0,0,0.12);
-    --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
-    color-scheme: light;
-  }
-}
-
-:root[data-theme="light"] {
-  --bg:         #f0ebfa;
-  --surface:    #e6dff5;
-  --card:       #ffffff;
-  --card-hover: #f5f0ff;
-  --border:     #cdbfec;
-  --border-hi:  #b0a0e0;
-  --fg:         #160c2e;
-  --fg-muted:   #5a4880;
-  --fg-dim:     #9880c0;
-  --night:      #5c3ea0;
-  --night-soft: #8060c8;
-  --night-bg:   rgba(92,62,160,0.1);
-  --spring:     #3a7040;
-  --spring-soft:#5a9060;
-  --spring-bg:  rgba(58,112,64,0.1);
-  --autumn:     #a05818;
-  --autumn-soft:#c07838;
-  --autumn-bg:  rgba(160,88,24,0.1);
-  --rose:       #a03060;
-  --rose-bg:    rgba(160,48,96,0.1);
-  --gold:       #9a7820;
-  --gold-soft:  #c09840;
-  --gold-bg:    rgba(154,120,32,0.1);
-  --silver:     #507090;
-  --cc:         #2a5ab8;
-  --cc-soft:    #5080d8;
-  --cc-bg:      rgba(42,90,184,0.1);
-  --tog:        #a05820;
-  --tog-soft:   #c07840;
-  --tog-bg:     rgba(160,88,32,0.1);
-  --fw:         #902020;
-  --fw-soft:    #b04040;
-  --fw-bg:      rgba(144,32,32,0.1);
-  --shadow-sm:  0 1px 4px rgba(0,0,0,0.12);
-  --shadow-md:  0 4px 16px rgba(0,0,0,0.15);
-  color-scheme: light;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -221,55 +141,12 @@ a:hover { color: var(--fg); }
 
 @media (min-width: 480px) { .header-series { display: block; } }
 
-.theme-btn {
-  padding: 5px 12px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--fg-muted);
-  font-size: 0.72rem;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.theme-btn:hover { border-color: var(--border-hi); color: var(--fg); }
-
 /* ---- Hero ---- */
 .hero {
   position: relative;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: transparent;
   overflow: hidden;
   padding: 0;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% -10%, color-mix(in srgb, var(--night) 22%, transparent), transparent 65%),
-    radial-gradient(ellipse 30% 40% at 10% 110%, color-mix(in srgb, var(--rose) 10%, transparent), transparent 60%),
-    radial-gradient(ellipse 25% 30% at 90% 80%, color-mix(in srgb, var(--gold) 8%, transparent), transparent 55%);
-  pointer-events: none;
-}
-
-/* Tiny stars decorative */
-.hero-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 12% 15%, var(--night-soft) 0%, transparent 100%),
-    radial-gradient(1px 1px at 30% 8%, var(--fg-dim) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 60% 20%, var(--gold) 0%, transparent 100%),
-    radial-gradient(1px 1px at 75% 10%, var(--fg-dim) 0%, transparent 100%),
-    radial-gradient(1px 1px at 88% 35%, var(--night-soft) 0%, transparent 100%),
-    radial-gradient(1px 1px at 20% 60%, var(--fg-dim) 0%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 45% 5%, var(--silver) 0%, transparent 100%),
-    radial-gradient(1px 1px at 93% 55%, var(--fg-dim) 0%, transparent 100%);
-  opacity: 0.6;
 }
 
 .hero .inner {
@@ -918,38 +795,38 @@ footer a:hover { color: var(--night-soft); }
 <!-- ==================== HEADER ==================== -->
 <header class="site-header">
   <div class="inner">
-    <span class="site-logo">A <span class="logo-accent">Court</span> of Cosplay</span>
+    <span class="site-logo">A Court of <span class="logo-accent">Cosplay</span></span>
     <div class="header-right">
       <span class="header-series">Unofficial Fan Guide</span>
-      <button class="theme-btn" id="themeBtn">☀ Light</button>
     </div>
   </div>
 </header>
-
-<main>
-
-<!-- ==================== HERO ==================== -->
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="inner">
-    <div class="hero-eyebrow">Unofficial Fan Cosplay Guide · Fantasy Book Series</div>
-    <h1>Step Into the <em>World</em></h1>
-    <p class="hero-sub">Character-by-character costume guides for A Court of Thorns &amp; Roses. Find the pieces. Pick your character.</p>
-    <div class="court-badges">
-      <span class="court-badge cb-night">✦ ACOTAR</span>
-    </div>
-  </div>
-</section>
 
 <div class="aff-bar">
   <div class="inner">Amazon links on this page may be affiliate links — this site earns a small commission at no extra cost to you.</div>
 </div>
 
-<section class="pick-section" aria-labelledby="catalog-heading">
+<main>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
   <div class="inner">
-    <div class="section-label">A Court of Thorns &amp; Roses</div>
-    <h2 class="section-title" id="catalog-heading">Pick Your Character</h2>
-    <p class="section-sub">Choose your character and look, then find the pieces to make it yours.</p>
+    <div class="hero-eyebrow">UNOFFICIAL FAN COSPLAY GUIDE FOR THE WORLD OF SARAH J MAAS</div>
+    <h1>LIKE CALLS TO LIKE.</h1>
+    <p class="hero-sub">Character-by-character costume guides. What do you see when you look in the Ouroboros Mirror?</p>
+  </div>
+</section>
+
+<section class="pick-section" aria-labelledby="catalog-heading">
+  <div class="character-picker-intro">
+    <div class="inner">
+      <div class="section-label">A Court of Thorns &amp; Roses</div>
+      <h2 class="section-title" id="catalog-heading">Pick Your Character</h2>
+      <p class="section-sub">Choose your character and look, then find the pieces to make it yours.</p>
+    </div>
+  </div>
+  <div class="character-picker-nav">
+    <div id="character-tabs"></div>
   </div>
   <div id="catalog" aria-busy="true"><p class="inner catalog-message">Loading costume guides…</p></div>
   <noscript><p class="inner catalog-message">Please enable JavaScript to view the costume guides.</p></noscript>
@@ -966,30 +843,6 @@ footer a:hover { color: var(--night-soft); }
 </footer>
 
 <script>
-// ---- Theme toggle ----
-const themeBtn = document.getElementById('themeBtn');
-const root = document.documentElement;
-let isDark = !window.matchMedia('(prefers-color-scheme: light)').matches;
-
-function applyTheme() {
-  root.dataset.theme = isDark ? 'dark' : 'light';
-  themeBtn.textContent = isDark ? '☀ Light' : '☾ Dark';
-}
-
-try {
-  const saved = localStorage.getItem('prythian-theme');
-  if (saved === 'dark') isDark = true;
-  else if (saved === 'light') isDark = false;
-} catch(e) {}
-
-applyTheme();
-
-themeBtn.addEventListener('click', () => {
-  isDark = !isDark;
-  applyTheme();
-  try { localStorage.setItem('prythian-theme', isDark ? 'dark' : 'light'); } catch(e) {}
-});
-
 gtag('event', 'page_view', { page_title: document.title, page_location: location.href });
 </script>
 <script src="starfall-sky.js"></script>

@@ -145,9 +145,9 @@ The configured base/table IDs are in `scripts/sync-airtable.mjs`. Field names ar
 
 ### Display behavior
 
-Characters retain selection tabs. Every eligible Look is a consecutive **h4 section**, not another set of tabs. Product cards are centered with 100×100 image frames and a **Buy on Amazon** pill; the whole card is a single shopping link.
+Characters retain selection tabs with their Airtable icons. The site header sticks to the top, and only the character-name tabs stick directly beneath it. The picker heading and introduction scroll normally; sticky offsets adapt to the actual header height. Every eligible Look is a consecutive **h4 section**, not another set of tabs. Product cards are centered with 100×100 image frames and a **Buy on Amazon** pill; the whole card is a single shopping link. Category labels are hidden on cards, but categories still determine sorting and fallback icons.
 
-The grid has 3 columns above 900px, 2 from 601–900px, and 1 at 600px and below. Images use `object-fit: contain`, preserving proportions. The theme toggle, sky animation, analytics, and affiliate disclosure remain. Groups and Tips are outside the current MVP.
+The grid has 3 columns above 900px, 2 from 601–900px, and 1 at 600px and below. Images use `object-fit: contain`, preserving proportions. The site uses a fixed dark theme with no light-mode toggle. The sky animation, analytics, and affiliate disclosure remain. Groups and Tips are outside the current MVP.
 
 ## Automatic product images
 
@@ -229,7 +229,7 @@ Open **http://127.0.0.1:8766/acotar-cosplay/**. This tests the relative asset/da
 
 Erin's fork is `Erin-Denton/acotar-cosplay`; the original repository is `lizbot/acotar-cosplay`. A friend should test the actual pushed review branch locally using the saved snapshot first, then optionally refresh using the privately shared token.
 
-Before approving a merge, check the rendered headings, card layout at desktop/mobile sizes, product destinations/images, theme switch, and keyboard navigation. `npm test` uses fixtures; any manual edit in the shared Airtable base is a real editorial change, not isolated test data. Coordinate such edits with the owner.
+Before approving a merge, check the rendered headings, card layout at desktop/mobile sizes, product destinations/images, dark-theme readability, and keyboard navigation. `npm test` uses fixtures; any manual edit in the shared Airtable base is a real editorial change, not isolated test data. Coordinate such edits with the owner.
 
 `.github/workflows/check.yml` runs tests and a snapshot build on pushes and pull requests. It needs no Airtable secret and does not deploy. A fork pull request can be reviewed without granting it a production credential.
 
@@ -256,7 +256,7 @@ The workflow tests the code, imports fresh data, builds the site, uploads only `
 
 | Path | Responsibility |
 |---|---|
-| `index.html` | Page shell, base styling, theme toggle, analytics, disclosures; no hardcoded character/product catalog |
+| `index.html` | Page shell, dark-theme styling, analytics, disclosures; no hardcoded character/product catalog |
 | `catalog.js` | Static JSON loading, character selection, stacked looks, cards, image-load fallback, click tracking |
 | `catalog.css` | Responsive grid, thumbnails, centered cards, pills, section spacing |
 | `starfall-sky.js`, `starfall-sky.css` | Background animation |

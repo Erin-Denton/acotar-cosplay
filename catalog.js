@@ -1,6 +1,16 @@
 'use strict';
 (() => {
   const mount = document.getElementById('catalog');
+  const tabsMount = document.getElementById('character-tabs');
+  const siteHeader = document.querySelector('.site-header');
+  const pickerNav = document.querySelector('.character-picker-nav');
+  function updateStickyOffsets() {
+    const headerHeight = siteHeader.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--site-header-height', headerHeight + 'px');
+    document.documentElement.style.setProperty('--sticky-nav-height', (headerHeight + pickerNav.getBoundingClientRect().height) + 'px');
+  }
+  const navObserver = new ResizeObserver(updateStickyOffsets);
+  navObserver.observe(siteHeader); navObserver.observe(pickerNav); updateStickyOffsets();
   const icons = { Clothing: '👗', Footwear: '👠', Wig: '💇', Jewelry: '💎', Headwear: '👑', Wings: '🪽', Makeup: '✨', Contacts: '👁️', Tattoos: '🌙', Props: '✦' };
   let selectedCharacter;
   const el = (tag, cls, text) => { const node = document.createElement(tag); if (cls) node.className = cls; if (text) node.textContent = text; return node; };
@@ -11,7 +21,11 @@
   function tabs(items, selected, cls, label, choose) {
     const list = el('div', cls); list.setAttribute('role', 'tablist'); list.setAttribute('aria-label', label);
     items.forEach(item => {
-      const button = el('button', (cls === 'char-tabs' ? 'char-tab' : 'look-sub-tab night') + (item.id === selected ? ' active' : ''), item.name);
+      const button = el('button', (cls === 'char-tabs' ? 'char-tab' : 'look-sub-tab night') + (item.id === selected ? ' active' : ''));
+      if (cls === 'char-tabs' && item.icon) {
+        const icon = el('span', 'char-tab-icon', item.icon); icon.setAttribute('aria-hidden', 'true'); button.append(icon);
+      }
+      button.append(el('span', 'char-tab-name', item.name));
       button.type = 'button'; button.id = 'tab-' + item.id; button.dataset.court = 'night'; button.setAttribute('role', 'tab'); button.setAttribute('aria-selected', String(item.id === selected)); button.setAttribute('aria-controls', 'panel-' + item.id); button.tabIndex = item.id === selected ? 0 : -1;
       button.addEventListener('click', () => choose(item.id, true)); list.append(button);
     });
@@ -27,7 +41,7 @@
   }
   function render(data, focusId) {
     const characters = data.characters || [];
-    if (!characters.length) { mount.replaceChildren(el('p', 'inner catalog-message', 'New costume guides are on their way. Check back soon.')); return; }
+    if (!characters.length) { tabsMount.replaceChildren(); mount.replaceChildren(el('p', 'inner catalog-message', 'New costume guides are on their way. Check back soon.')); return; }
     const character = characters.find(c => c.id === selectedCharacter) || characters[0]; selectedCharacter = character.id;
     const wrap = el('div', 'char-tabs-wrap');
     wrap.append(tabs(characters, character.id, 'char-tabs', 'Character guides', (id, focus) => { selectedCharacter = id; render(data, focus ? id : null); track('view_character', { series: 'acotar', character: id }); }));
@@ -58,7 +72,7 @@
       }
       const copy = el('span', 'btn-label'); copy.append(el('span', 'product-copy', product.name));
       if (product.description) copy.append(el('span', 'product-description', product.description));
-      const details = [product.category, ...(product.colors || [])].filter(Boolean);
+      const details = (product.colors || []).filter(Boolean);
       if (Number.isFinite(product.price) && product.priceCheckedOn) details.push('Est. ' + new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price) + ' · checked ' + product.priceCheckedOn);
       if (details.length) copy.append(el('span', 'product-metadata', details.join(' · ')));
       link.append(thumbnail, copy, el('span', 'product-buy-pill', 'Buy on Amazon')); products.append(link);
@@ -66,8 +80,12 @@
     });
     lookPanel.append(products); panel.append(lookPanel);
     });
-    inner.append(panel); mount.replaceChildren(wrap, inner);
-    if (focusId) document.getElementById('tab-' + focusId)?.focus();
+    tabsMount.replaceChildren(wrap); inner.append(panel); mount.replaceChildren(inner);
+    updateStickyOffsets();
+    if (focusId) {
+      document.getElementById('tab-' + focusId)?.focus({ preventScroll: true });
+      panel.scrollIntoView({ block: 'start', behavior: 'instant' });
+    }
   }
   async function load() {
     mount.setAttribute('aria-busy', 'true');

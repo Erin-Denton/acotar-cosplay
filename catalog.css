@@ -32,3 +32,23 @@
 
 .look-section + .look-section { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--border); }
 .look-section .look-heading { margin: 0 0 18px; }
+
+.char-tab { display: inline-flex; align-items: center; gap: 8px; }
+.char-tab-icon { flex: 0 0 auto; font-size: 1.05rem; line-height: 1; letter-spacing: normal; }
+.aff-bar .inner { text-align: center; }
+
+.site-logo { color: #fff; }
+.site-logo .logo-accent { color: var(--gold); }
+
+/* Keep the stars visible in the hero and group the picker in a purple band. */
+.pick-section { padding-top: 0; }
+.character-picker-intro { padding: 42px 0 24px; background: var(--surface); }
+.char-tabs-wrap { margin-top: 0; border-top: 0; background: var(--surface); }
+
+/* Keep only the character tabs beneath the sticky site header. */
+.character-picker-nav { position: sticky; top: var(--site-header-height, 54px); z-index: 90; background: var(--surface); }
+.char-panel, .look-section { scroll-margin-top: calc(var(--sticky-nav-height, 110px) + 16px); }
+@media (max-width: 600px) {
+  .character-picker-intro { padding: 18px 0 14px; }
+  .character-picker-intro .section-sub { margin-bottom: 0; }
+}
