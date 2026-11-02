@@ -483,64 +483,10 @@ a:hover { color: var(--fg); }
 .sub-panel.active { display: block; }
 
 /* ---- Look grid ---- */
-.look-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 14px;
-  margin-bottom: 6px;
-}
-
-.look-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.look-card:hover {
-  border-color: var(--border-hi);
-  box-shadow: var(--shadow-md);
-}
-
-.look-card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.look-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fg);
-}
-
-.look-level {
-  font-size: 0.68rem;
-  padding: 2px 8px;
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--fg-muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.04em;
-}
-
-.look-desc {
-  font-size: 0.9rem;
-  color: var(--fg-muted);
-  margin: 0 0 16px;
-  line-height: 1.55;
-}
-
 /* ---- Product buttons ---- */
 .product-list { display: flex; flex-direction: column; gap: 7px; }
+.char-panel > .product-list,
+.sub-panel > .product-list { margin-top: 20px; }
 
 .product-btn {
   display: flex;
@@ -702,11 +648,6 @@ footer a:hover { color: var(--night-soft); }
 
 /* ---- Tablet (600–900px) ---- */
 @media (max-width: 900px) {
-  .look-grid { grid-template-columns: 1fr; }
-  .look-desc { display: none; }
-  .look-level { display: none; }
-  .look-card-head { margin-bottom: 14px; }
-  .look-card { padding: 16px; }
   .product-btn { padding: 13px 14px; font-size: 0.95rem; }
   .btn-icon { width: 30px; height: 30px; }
 
@@ -751,10 +692,6 @@ footer a:hover { color: var(--night-soft); }
 
   /* Look sub-tabs */
   .look-sub-tab { font-size: 0.68rem; padding: 5px 11px; }
-
-  /* Look cards — buttons as primary CTA */
-  .look-card { padding: 14px; }
-  .look-name { font-size: 0.76rem; }
 
   /* Product buttons — full-width, prominent tap target */
   .product-btn {
@@ -1064,106 +1001,52 @@ footer a:hover { color: var(--night-soft); }
         </div>
 
         <div class="sub-panel active" id="f-high-lady">
-          <div class="look-grid">
-            <div class="look-card">
-              <div class="look-card-head">
-                <span class="look-name">Quick Look</span>
-                <span class="look-level">Easy</span>
-              </div>
-              <p class="look-desc">Black gown or flowing dark dress, star or constellation face paint on one cheekbone, silver jewelry. The face paint is the detail that reads as High Lady Feyre from across a convention floor.</p>
-              <div class="product-list">
-                <a href="https://link.amazon/B0ejWu1ud" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black maxi or evening dress</span><span class="btn-arrow">→</span></a>
-                <a href="https://link.amazon/B0ctnWhm8" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Add sparkles to your skin and glow</span><span class="btn-arrow">→</span></a>
-                <a href="https://link.amazon/B01K4kVbt" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Silver statement jewelry set</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
-            <div class="look-card">
-              <div class="look-card-head">
-                <span class="look-name">High Lady Full Build</span>
-                <span class="look-level">Weekend project</span>
-              </div>
-              <p class="look-desc">Add a dramatic midnight cape, a star and crescent moon crown, and rhinestone gems pressed along the cheekbone. A deep plum gown works if you want color over pure black. Feyre's tattoos on her left hand and forearm complete the look.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Star &amp; crescent moon crown</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black / midnight blue cape</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Celestial rhinestone face gems</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌙</span><span class="btn-label">Temporary Night Court tattoo sleeve</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
+          <div class="product-list">
+            <a href="https://link.amazon/B0ejWu1ud" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black maxi or evening dress</span><span class="btn-arrow">→</span></a>
+            <a href="https://link.amazon/B0ctnWhm8" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Add sparkles to your skin and glow</span><span class="btn-arrow">→</span></a>
+            <a href="https://link.amazon/B01K4kVbt" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Silver statement jewelry set</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Star &amp; crescent moon crown</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black / midnight blue cape</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Celestial rhinestone face gems</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌙</span><span class="btn-label">Temporary Night Court tattoo sleeve</span><span class="btn-arrow">→</span></a>
           </div>
         </div>
 
         <div class="sub-panel" id="f-starfall">
-          <div class="look-grid">
-            <div class="look-card">
-              <div class="look-card-head">
-                <span class="look-name">Starfall Quick Look</span>
-                <span class="look-level">Easiest</span>
-              </div>
-              <p class="look-desc">The iconic blue gown from the Starfall celebration in <em>A Court of Mist and Fury</em>. A flowing midnight blue or periwinkle dress with iridescent shimmer — the moment Feyre truly belongs to the Night Court.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Midnight blue / periwinkle formal gown</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Iridescent shimmer body spray</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Silver &amp; sapphire star earrings</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
-            <div class="look-card">
-              <div class="look-card-head">
-                <span class="look-name">Starfall Full Build</span>
-                <span class="look-level">Weekend project</span>
-              </div>
-              <p class="look-desc">Add glittering star face gems along the temples and cheekbones, a sheer blue or silver cape that floats as you move, and a constellation crown. Everything should catch light — this is a night of falling stars.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌟</span><span class="btn-label">Constellation / star tiara crown</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧣</span><span class="btn-label">Sheer blue / silver floaty cape</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Star face gems (press-on)</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌙</span><span class="btn-label">Temporary Night Court tattoo sleeve</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
+          <div class="product-list">
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Midnight blue / periwinkle formal gown</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Iridescent shimmer body spray</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Silver &amp; sapphire star earrings</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌟</span><span class="btn-label">Constellation / star tiara crown</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧣</span><span class="btn-label">Sheer blue / silver floaty cape</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Star face gems (press-on)</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌙</span><span class="btn-label">Temporary Night Court tattoo sleeve</span><span class="btn-arrow">→</span></a>
           </div>
         </div>
 
         <div class="sub-panel" id="f-utm">
-          <div class="look-grid">
-            <div class="look-card">
-              <div class="look-card-head">
-                <span class="look-name">Quick Look</span>
-                <span class="look-level">Easy</span>
-              </div>
-              <p class="look-desc">A plain white or pale grey shift dress — deliberately simple, deliberately stripped of color. Feyre Under the Mountain is a mortal among Fae, stripped of everything. Add bare feet or simple flats and a haunted expression.</p>
-              <div class="product-list">
-                <div class="product-item">
-                  <button class="product-toggle" aria-expanded="false">
-                    <span class="btn-icon">🩱</span>
-                    <span class="btn-label">White / pale shift dress</span>
-                    <span class="opt-count">5 options</span>
-                    <span class="toggle-chevron">›</span>
-                  </button>
-                  <div class="options-list">
-                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 1</span><span class="opt-arrow">→</span></a>
-                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 2</span><span class="opt-arrow">→</span></a>
-                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 3</span><span class="opt-arrow">→</span></a>
-                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 4</span><span class="opt-arrow">→</span></a>
-                    <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 5</span><span class="opt-arrow">→</span></a>
-                  </div>
-                </div>
-                <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🪡</span><span class="btn-label">Fake blood or dirt makeup (optional)</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🔗</span><span class="btn-label">Thin chain bracelet / cuff prop</span><span class="btn-arrow">→</span></a>
+          <div class="product-list">
+            <div class="product-item">
+              <button class="product-toggle" aria-expanded="false">
+                <span class="btn-icon">🩱</span>
+                <span class="btn-label">White / pale shift dress</span>
+                <span class="opt-count">5 options</span>
+                <span class="toggle-chevron">›</span>
+              </button>
+              <div class="options-list">
+                <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 1</span><span class="opt-arrow">→</span></a>
+                <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 2</span><span class="opt-arrow">→</span></a>
+                <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 3</span><span class="opt-arrow">→</span></a>
+                <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 4</span><span class="opt-arrow">→</span></a>
+                <a href="#" class="option-link" target="_blank" rel="noopener"><span class="opt-label">Dress option 5</span><span class="opt-arrow">→</span></a>
               </div>
             </div>
-            <div class="look-card">
-              <div class="look-card-head">
-                <span class="look-name">Amarantha's Court Build</span>
-                <span class="look-level">Weekend project</span>
-              </div>
-              <p class="look-desc">Amarantha's court demanded spectacle. A red-and-black formal gown, heavy dark eye makeup, and jewelry that feels more like shackles than adornment. Add a faint bruise or cut SFX makeup detail for the full effect.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">🩸</span><span class="btn-label">Deep red formal or ballgown dress</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Heavy dark eye shadow palette</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🔗</span><span class="btn-label">Chain or cuff statement jewelry</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">SFX bruise / wound makeup kit</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
+            <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🪡</span><span class="btn-label">Fake blood or dirt makeup (optional)</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn" target="_blank" rel="noopener"><span class="btn-icon">🔗</span><span class="btn-label">Thin chain bracelet / cuff prop</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">🩸</span><span class="btn-label">Deep red formal or ballgown dress</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Heavy dark eye shadow palette</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🔗</span><span class="btn-label">Chain or cuff statement jewelry</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">SFX bruise / wound makeup kit</span><span class="btn-arrow">→</span></a>
           </div>
         </div>
       </div>
@@ -1178,32 +1061,14 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">High Lord of the Night Court. Violet eyes, dark hair, vast dark wings. Rhysand's look is unmistakably powerful — all controlled shadow and restrained danger. He dresses like he knows exactly how terrifying he is.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">All black: fitted black trousers, a high-collar black shirt or jacket. Add violet colored contacts if you want. The look alone reads as Rhysand to anyone who's read the books.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black high-collar dress shirt</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Black slim-fit trousers</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Violet / amethyst colored contacts</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Full Wings Build</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Add wings, a long dramatic frock coat, and silver star jewelry. Wings can be large feathered costume wings painted matte black, or a harness worn under a cape that drapes like folded wings.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Large black wings / wing harness</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Long black frock coat</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Silver star &amp; moon jewelry</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💠</span><span class="btn-label">Face rhinestone gems</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black high-collar dress shirt</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Black slim-fit trousers</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Violet / amethyst colored contacts</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Large black wings / wing harness</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Long black frock coat</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">✦</span><span class="btn-label">Silver star &amp; moon jewelry</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💠</span><span class="btn-label">Face rhinestone gems</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1217,31 +1082,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Feyre's fierce older sister. Turned fae against her will, she channels rage and grief into becoming a Valkyrie. The warrior look is silver, sharp, and proud.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Silver or icy white dress with a structured warrior belt and silver arm cuffs. Nesta's power came from enchanted objects — silver metallic details throughout signal her story.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥈</span><span class="btn-label">Silver / icy white formal dress</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⚔️</span><span class="btn-label">Wide structured warrior belt</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Silver arm cuffs / bracers</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Valkyrie Full Build</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Add the silver crown, a dramatic silver or white cape, and Athalar-style pointed fae ears. This is the Nesta who earned her Valkyrie title — cold-beautiful, unbreakable.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Silver leaf / warrior crown</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Silver / white dramatic cape</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥈</span><span class="btn-label">Silver / icy white formal dress</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⚔️</span><span class="btn-label">Wide structured warrior belt</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Silver arm cuffs / bracers</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Silver leaf / warrior crown</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Silver / white dramatic cape</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1255,31 +1102,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">General of Rhysand's armies and a warrior to his core. Battle-worn black leathers, massive wings, and war paint. He fights like he enjoys it, because he does.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Black tactical jacket over a dark base, black combat boots, and war paint lines across the cheekbones and jaw. The face paint is Cassian's signature marker and takes five minutes with black face paint.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black tactical / field jacket</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">Black face paint (war paint)</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Full Warrior Build</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Add wings and faux leather armor panels or vest. A dark red bracer or sash adds the warrior camp color — brutal, imposing, ready for anything.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Black wings / wing harness</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🛡️</span><span class="btn-label">Faux-leather armor vest</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">🔴</span><span class="btn-label">Dark red leather bracer / sash</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black tactical / field jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">Black face paint (war paint)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Black wings / wing harness</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🛡️</span><span class="btn-label">Faux-leather armor vest</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">🔴</span><span class="btn-label">Dark red leather bracer / sash</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1293,31 +1122,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Spymaster of the Night Court. Azriel moves like something darker than shadow — close-fitting matte blacks, a hooded cloak, and scarred hands always hidden in dark gloves. Quiet. Lethal. Watching.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Black hooded cloak over all black, and dark leather gloves covering the hands and wrists. The gloves are the non-negotiable piece — Azriel's scarred hands are never uncovered. Keep everything muted, not dramatic.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black hooded cloak</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧤</span><span class="btn-label">Black leather gloves</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⚫</span><span class="btn-label">Black fitted base outfit</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Spymaster Full Build</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Add a black-bladed knife prop and matte dark wings. Azriel's wings are darker and less prominent than Cassian's, so fabric wings in near-black charcoal work better than feathered ones here.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Black dagger prop</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Charcoal / matte black wings</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💨</span><span class="btn-label">Dark grey body / shadow paint</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black hooded cloak</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧤</span><span class="btn-label">Black leather gloves</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">⚫</span><span class="btn-label">Black fitted base outfit</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Black dagger prop</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦇</span><span class="btn-label">Charcoal / matte black wings</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💨</span><span class="btn-label">Dark grey body / shadow paint</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1331,32 +1142,14 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">The most powerful female warrior alive, Rhysand's Third-in-Command. Mor walks into a room and everyone knows it — usually in deep red or gold, devastatingly dressed for exactly the effect she intends.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">The Red Dress Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Deep crimson bodycon or flowing red dress, gold jewelry stacked throughout, long golden blonde hair (wig if needed). The red dress is Mor's most recognized look — her armor for the political courts.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Deep red bodycon / formal dress</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold layered jewelry set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">👱</span><span class="btn-label">Long golden blonde wig</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💋</span><span class="btn-label">Bold red lip color</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Full Build + Wings</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Mor can teleport, so she doesn't need armor — she shows up dressed for the occasion and then happens to have wings. Add wings and a gold hair accessory to complete the look.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦋</span><span class="btn-label">Large feathered wings</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Gold hair comb / ornament</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">Gold / warm eyeshadow palette</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Deep red bodycon / formal dress</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold layered jewelry set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">👱</span><span class="btn-label">Long golden blonde wig</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💋</span><span class="btn-label">Bold red lip color</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🦋</span><span class="btn-label">Large feathered wings</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Gold hair comb / ornament</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">💄</span><span class="btn-label">Gold / warm eyeshadow palette</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1370,31 +1163,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Son of the Autumn Court, emissary to the Spring Court. Auburn hair, a mechanical eye — a gift from Helion — and the kind of warm copper palette that makes him look like he walked out of a fae autumn. Sharp and a little sad.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Auburn or copper wig (if needed), rust or amber tunic, and a steampunk-style mechanical eye patch or gear eye prosthetic. The eye is Lucien's most distinctive feature and the piece that makes the costume click.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🦊</span><span class="btn-label">Auburn / copper-red wig</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🟧</span><span class="btn-label">Rust / amber tunic or vest</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">⚙️</span><span class="btn-label">Steampunk mechanical eye patch</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Full Autumn Court Build</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Build out the Autumn Court palette in full: rust, amber, burnt orange, and deep gold. Add a cape in autumn-leaf shades, copper jewelry, and pointed fae ears. This is Lucien at his most court-recognizable.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🍂</span><span class="btn-label">Autumn-toned cape / cloak</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Copper &amp; gold jewelry set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🦊</span><span class="btn-label">Auburn / copper-red wig</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🟧</span><span class="btn-label">Rust / amber tunic or vest</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">⚙️</span><span class="btn-label">Steampunk mechanical eye patch</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">🍂</span><span class="btn-label">Autumn-toned cape / cloak</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Copper &amp; gold jewelry set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips (silicone)</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1408,31 +1183,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">The gentlest Archeron sister. A Seer made fae, she tends her garden and sees visions of the future. Elain's look is soft, floral, and quietly ethereal — she belongs in a sunlit greenhouse, or somewhere beautiful and just slightly strange.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easiest</span>
-            </div>
-            <p class="look-desc">Soft floral dress in blush, ivory, or pale yellow, wildflower crown, and delicate gold jewelry. Elain is the most approachable of the three sisters to costume — she looks like a fairy-tale princess who spends mornings in the garden.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌸</span><span class="btn-label">Blush / floral midi or maxi dress</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌼</span><span class="btn-label">Wildflower / meadow floral crown</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Delicate gold chain jewelry</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Garden Seer Full Build</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Add a small wicker basket with faux flower stems as a prop, a soft linen apron layered over the dress, and subtle pointed fae ears. The Seer look keeps the beauty but adds a dreaming, faraway quality to it.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🧺</span><span class="btn-label">Small wicker / rattan basket (prop)</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌷</span><span class="btn-label">Faux flower stems (prop bouquet)</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Subtle pointed ear tips</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌸</span><span class="btn-label">Blush / floral midi or maxi dress</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌼</span><span class="btn-label">Wildflower / meadow floral crown</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Delicate gold chain jewelry</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🧺</span><span class="btn-label">Small wicker / rattan basket (prop)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌷</span><span class="btn-label">Faux flower stems (prop bouquet)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Subtle pointed ear tips</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1446,31 +1203,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">High Lord of the Spring Court. Blonde, green-eyed, and cursed to wear a mask by ancient magic. Tamlin's look combines the Spring Court's wild abundance with the gold mask that became one of the series' most iconic images.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">Quick Look</span>
-              <span class="look-level">Easy</span>
-            </div>
-            <p class="look-desc">Forest-green tunic or vest over natural earth tones, and the gold leaf masquerade mask. The mask is what makes people say "Tamlin" — everything else supports it, but the mask is the costume.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌲</span><span class="btn-label">Forest green tunic / linen vest</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🎭</span><span class="btn-label">Gold leaf masquerade mask</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🦌</span><span class="btn-label">Antler headpiece / crown</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head">
-              <span class="look-name">High Lord Full Build</span>
-              <span class="look-level">Weekend project</span>
-            </div>
-            <p class="look-desc">Add a dramatic forest-green hooded cloak, Spring Court gold accents throughout, and pointed fae ears. For his beast aspect, fur-trimmed layers add a wilder, more dangerous edge to the nature-king look.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Forest green hooded cloak</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold &amp; green jewelry / belt</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🌲</span><span class="btn-label">Forest green tunic / linen vest</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🎭</span><span class="btn-label">Gold leaf masquerade mask</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🦌</span><span class="btn-label">Antler headpiece / crown</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ps" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Forest green hooded cloak</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold &amp; green jewelry / belt</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1576,25 +1315,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Half-human, half-Fae party girl turned reluctant hero. Long auburn hair, a glowing star scar in the center of her chest, and an irreverent confidence that masks everything underneath. The star is what makes her Bryce from across a convention floor.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Fitted jeans or leather pants, a casual blouse or crop top, and a glowing star body paint or adhesive gem on the sternum. The star scar is Bryce's signature — everything else is stylish street clothes.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Star chest scar body gem / decal</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Fitted leather jacket</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🦰</span><span class="btn-label">Long auburn / red-brown wig</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add glowing LED body paint or UV star effect for the scar, gold layered jewelry, and pointed fae ears. For the later books look, dark leathers and combat boots replace the casual aesthetic — still star scar, always.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">UV / neon star body paint</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Gold layered jewelry set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Subtle pointed fae ear tips</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">⭐</span><span class="btn-label">Star chest scar body gem / decal</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Fitted leather jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🦰</span><span class="btn-label">Long auburn / red-brown wig</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">UV / neon star body paint</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Gold layered jewelry set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Subtle pointed fae ear tips</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1608,25 +1335,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">A fallen angel with massive grey wings and a halo brand seared into his brow. Powerful, brooding, and carrying centuries of pain. The halo tattoo on the forehead and the grey wings are his defining marks.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Dark tactical outfit, large grey or charcoal wings, and a halo temporary tattoo across the forehead. The halo brand is the piece that identifies Hunt immediately — without it, he's just a winged figure in black.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🌀</span><span class="btn-label">Halo / arc temporary brow tattoo</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🪶</span><span class="btn-label">Large grey / charcoal wings</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black tactical outfit</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Warrior Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add a dark leather tactical vest or armor panels, wrist restraint cuffs (symbolizing his bound state in earlier books), and combat boots. Grey wings in the largest size you can manage — Hunt's are enormous.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🛡️</span><span class="btn-label">Dark leather tactical vest</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">⛓️</span><span class="btn-label">Wrist cuff restraints (prop)</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🌀</span><span class="btn-label">Halo / arc temporary brow tattoo</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🪶</span><span class="btn-label">Large grey / charcoal wings</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black tactical outfit</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🛡️</span><span class="btn-label">Dark leather tactical vest</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">⛓️</span><span class="btn-label">Wrist cuff restraints (prop)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1640,25 +1355,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Punk Fae prince with a dark Starsword at his hip. Black hair, dragon tattoos covering both arms, and the aesthetics of someone who rejected royal expectations and leaned straight into them anyway. Equal parts edge and reluctant heir.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Black jeans, leather jacket, and dragon arm tattoo sleeves. Ruhn's punk-Fae identity is the whole look — the tattoo sleeves read immediately as him. Add pointed ears to signal his Fae heritage.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon tattoo arm sleeves</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black moto leather jacket</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Build + Starsword</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add a black-bladed sword prop, dark blue or black-tipped hair color spray, and silver jewelry. The Starsword is a black blade that drinks light rather than reflecting it — flat matte black is exactly right for the prop.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Black matte sword prop</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Dark blue / black hair color spray</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💍</span><span class="btn-label">Silver ring stack set</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon tattoo arm sleeves</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black moto leather jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Black matte sword prop</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Dark blue / black hair color spray</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">💍</span><span class="btn-label">Silver ring stack set</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1672,25 +1375,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Intelligence operative with cold precision and a military bearing that never slips. Ivory and gold are her colors — every detail deliberate, nothing out of place. Lidia's costume is the look of someone who decided exactly who they are and dressed accordingly.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Military-cut ivory blazer or structured jacket, fitted dark trousers, and gold insignia pin. The sharp, deliberate silhouette is the costume — Lidia looks like she was assembled rather than dressed.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Ivory / cream structured blazer</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🏅</span><span class="btn-label">Gold military insignia pin</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">👢</span><span class="btn-label">Black high-heeled boots</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Uniform Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Build out the full fantasy military look: add gold epaulette shoulder details, a fitted ivory bodysuit as a base, and sleek gold jewelry. Cool, controlled, and deliberately intimidating.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold epaulette shoulder pieces</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Minimal gold jewelry set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Fitted ivory bodysuit</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Ivory / cream structured blazer</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🏅</span><span class="btn-label">Gold military insignia pin</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">👢</span><span class="btn-label">Black high-heeled boots</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Gold epaulette shoulder pieces</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">💛</span><span class="btn-label">Minimal gold jewelry set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pcc" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Fitted ivory bodysuit</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1762,38 +1453,20 @@ footer a:hover { color: var(--night-soft); }
           <button class="look-sub-tab tog" data-sub="tog-aelin-queen">👑 Queen Look</button>
         </div>
         <div class="sub-panel active" id="tog-aelin-assassin">
-          <div class="look-grid">
-            <div class="look-card">
-              <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-              <p class="look-desc">Form-fitting black fighting leathers or a black bodysuit with dark trousers, and turquoise or teal colored contacts. Aelin's assassin era is defined by her eyes — the striking blue-green that no one forgets — and the clean, dangerous all-black.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black fitted bodysuit</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Turquoise / teal colored contacts</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
-            <div class="look-card">
-              <div class="look-card-head"><span class="look-name">Full Assassin Build</span><span class="look-level">Weekend project</span></div>
-              <p class="look-desc">Add a face mask or dark half-mask (her disguise), twin short-sword or dagger props, and a fitted tactical jacket. The mask signals the assassin identity — once it's on, the character reads immediately.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🎭</span><span class="btn-label">Dark half-mask / face mask prop</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Twin dagger props</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black tactical jacket</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
+          <div class="product-list">
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black fitted bodysuit</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Turquoise / teal colored contacts</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🎭</span><span class="btn-label">Dark half-mask / face mask prop</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🗡️</span><span class="btn-label">Twin dagger props</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Black tactical jacket</span><span class="btn-arrow">→</span></a>
           </div>
         </div>
         <div class="sub-panel" id="tog-aelin-queen">
-          <div class="look-grid">
-            <div class="look-card">
-              <div class="look-card-head"><span class="look-name">Queen Quick Look</span><span class="look-level">Easy</span></div>
-              <p class="look-desc">Gold or ivory formal gown, a glittering crown, and turquoise contacts. The queen look is warm where the assassin is cold — gold and ember tones throughout, still with those striking turquoise eyes that mark her bloodline.</p>
-              <div class="product-list">
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Gold or ivory formal gown</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Gold glittering crown</span><span class="btn-arrow">→</span></a>
-                <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Turquoise colored contacts</span><span class="btn-arrow">→</span></a>
-              </div>
-            </div>
+          <div class="product-list">
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Gold or ivory formal gown</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Gold glittering crown</span><span class="btn-arrow">→</span></a>
+            <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Turquoise colored contacts</span><span class="btn-arrow">→</span></a>
           </div>
         </div>
       </div>
@@ -1808,25 +1481,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Ancient Fae warrior with silver hair, pointed ears, and the kind of stillness that means he is calculating your twelve fastest exits. Forest green and silver throughout, with wind and ice magic that leaves frost in its wake.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Silver wig, dark forest-green tactical clothing, and pointed fae ears. Rowan's look is elemental — he belongs in the forest and dresses like it. The silver hair and pointed ears together read as Fae before anything else registers.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🪄</span><span class="btn-label">Silver / white wig</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🌲</span><span class="btn-label">Forest green tactical jacket</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Warrior Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add a pine-green dramatic cloak, swirling wind-pattern tattoo sleeves (his marks), and a sword prop. The tattoos are his power-bound marks — dark swirling patterns on the forearms and neck.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Forest green hooded cloak</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🌀</span><span class="btn-label">Swirling arm tattoo sleeves</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">⚔️</span><span class="btn-label">Sword prop</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🪄</span><span class="btn-label">Silver / white wig</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🌲</span><span class="btn-label">Forest green tactical jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pr" target="_blank" rel="noopener"><span class="btn-icon">👂</span><span class="btn-label">Pointed fae ear tips</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Forest green hooded cloak</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🌀</span><span class="btn-label">Swirling arm tattoo sleeves</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">⚔️</span><span class="btn-label">Sword prop</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1840,25 +1501,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">White-haired witch leader with iron teeth, iron nails, and the kind of cold beauty that makes you forget she could kill you before you finished the thought. Black robes, pale face, and those retractable iron claws — Manon is one of the most visually dramatic characters in the series.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Long white wig, dramatic black outfit (robes or structured black dress), and pale silvery-white face makeup. Manon's stark white-and-black contrast is her whole identity. Add iron-effect nail tips and the look is complete.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Long straight white wig</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black dramatic robe / dress</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💅</span><span class="btn-label">Long silver / iron nail tips</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Witch Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add pale grey-white face and body paint, golden witch eyes (yellow contacts), and a black leather witch-style hat or crown. Manon's gold eyes are her one warm feature against the cold white-and-black palette — they make the whole look.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🎨</span><span class="btn-label">Pale grey-white face paint</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Gold / amber contacts</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🎩</span><span class="btn-label">Black leather crown / witch hat</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🤍</span><span class="btn-label">Long straight white wig</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👗</span><span class="btn-label">Black dramatic robe / dress</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💅</span><span class="btn-label">Long silver / iron nail tips</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">🎨</span><span class="btn-label">Pale grey-white face paint</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👁️</span><span class="btn-label">Gold / amber contacts</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🎩</span><span class="btn-label">Black leather crown / witch hat</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1872,25 +1521,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Prince-turned-king with sapphire blue as his dynasty's color, dark hair, and magic that was supposed to be impossible. Charming and tormented in equal measure, Dorian dresses like royalty and fights like someone who learned their power the hard way.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Deep sapphire blue coat or formal jacket, fitted dark trousers, and a silver signet-style ring. Sapphire is the Havilliard dynasty color — anything in that deep blue reads immediately as Dorian to anyone who knows the books.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Sapphire blue formal jacket / coat</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💍</span><span class="btn-label">Silver signet ring</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Fitted dark trousers</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Royal Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add a silver crown, sapphire gem jewelry, and dark shadow-effect body paint on the hands and forearms for his magic. Dorian's shadow magic manifests as darkness that pools from his hands — dark body paint or fingerless black gloves capture this.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Silver crown</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Sapphire gem jewelry set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌑</span><span class="btn-label">Black shadow hand / arm paint</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💙</span><span class="btn-label">Sapphire blue formal jacket / coat</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💍</span><span class="btn-label">Silver signet ring</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Fitted dark trousers</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">👑</span><span class="btn-label">Silver crown</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn ptog" target="_blank" rel="noopener"><span class="btn-icon">💎</span><span class="btn-label">Sapphire gem jewelry set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🌑</span><span class="btn-label">Black shadow hand / arm paint</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1958,25 +1595,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Booksmart and physically fragile, she wasn't supposed to survive the war college — and then became one of its most powerful riders. Silver-streaked dark hair, lightning-bolt bond mark tattoos on her forearms, and dark riding leathers that she earned the hard way.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Dark fitted leathers or black base outfit, lightning bolt temporary tattoos on the forearms, and a silver hair streak. The lightning marks are Violet's bond mark tattoos — they appeared when she bonded her dragon. The silver streak is her most distinctive physical feature.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">⚡</span><span class="btn-label">Lightning bolt temporary tattoos</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🪄</span><span class="btn-label">Silver hair streak spray / clip-in</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Dark fitted leathers / jacket</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Rider Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add a dragon rider harness or chest plate prop, arm bracers with lightning detail, and combat boots. The harness signals rider status immediately — dragon riding gear is the visual language of the war college.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon rider chest harness (prop)</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Arm bracers with lightning detail</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">⚡</span><span class="btn-label">Lightning bolt temporary tattoos</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🪄</span><span class="btn-label">Silver hair streak spray / clip-in</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Dark fitted leathers / jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon rider chest harness (prop)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Arm bracers with lightning detail</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -1990,25 +1615,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">The most dangerous rider at the war college, with shadow magic and a rebellion relic mark that covers the left side of his neck and jaw. All black. Always. The rebellion relic is a dark swirling tattoo worn by children of executed rebels — Xaden carries it as a reminder of what was taken and a warning of what he became.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">All black — everything. Dark tactical jacket, black combat trousers, black boots. Add a rebellion relic temporary tattoo on the left side of the neck: a dark, swirling intricate mark that creeps up toward the jaw. Without it, it's just black clothes. With it, it's unmistakably Xaden.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🌑</span><span class="btn-label">Swirling neck / jaw temp tattoo</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black tactical jacket</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Shadow Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add dark shadow body paint on the hands and forearms (his shadow magic manifests there), a black dragon rider harness, and a dark cloak. The shadow effect on the hands is the visual signature of his power — dark paint that fades toward the wrists.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💀</span><span class="btn-label">Black shadow hand / arm body paint</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon rider harness (prop)</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Long dark cloak</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🌑</span><span class="btn-label">Swirling neck / jaw temp tattoo</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🖤</span><span class="btn-label">Black tactical jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💀</span><span class="btn-label">Black shadow hand / arm body paint</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Dragon rider harness (prop)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🧥</span><span class="btn-label">Long dark cloak</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -2022,25 +1635,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Violet's closest friend and one of the most naturally gifted riders in their year. Warm earth tones, a grounded confidence, and braided dark hair. Rhiannon is the emotional anchor in a brutal world — her look is approachable and real, not dramatic.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easiest</span></div>
-            <p class="look-desc">Brown leather jacket or vest over a warm-toned base outfit, braided hair with a simple leather cord, and copper or amber jewelry. Rhiannon's look is warm and grounded — earthy colors that contrast with the sharper aesthetics of the other riders.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🤎</span><span class="btn-label">Brown leather jacket or vest</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Copper / amber jewelry set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🪢</span><span class="btn-label">Leather hair cord / braid wrap</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Rider Build</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Add earth-tone arm bracers, riding gloves, and a rider harness prop in brown leather. The earth magic aesthetic comes through in the warm, natural material choices — nothing synthetic, nothing shiny.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Brown leather arm bracers</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🧤</span><span class="btn-label">Leather riding gloves</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Brown rider harness (prop)</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🤎</span><span class="btn-label">Brown leather jacket or vest</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pa" target="_blank" rel="noopener"><span class="btn-icon">✨</span><span class="btn-label">Copper / amber jewelry set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🪢</span><span class="btn-label">Leather hair cord / braid wrap</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">💪</span><span class="btn-label">Brown leather arm bracers</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🧤</span><span class="btn-label">Leather riding gloves</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Brown rider harness (prop)</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
@@ -2054,25 +1655,13 @@ footer a:hover { color: var(--night-soft); }
             <p class="char-desc">Squad leader and tactical mind, by-the-book with precision that borders on rigidity. Military uniform aesthetic — structured, precise, every detail correct. Dain's look is the war college at its most formal, brown and gold with the bearing of someone who has never once been late.</p>
           </div>
         </div>
-        <div class="look-grid">
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Quick Look</span><span class="look-level">Easy</span></div>
-            <p class="look-desc">Military-cut brown jacket with structured shoulders, dark fitted trousers, and gold command insignia pin. Dain's look is structured precision — squared collar, nothing out of place. The insignia marks his rank.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🟫</span><span class="btn-label">Military-cut brown / khaki jacket</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🏅</span><span class="btn-label">Gold command insignia pin</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Dark fitted uniform trousers</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
-          <div class="look-card">
-            <div class="look-card-head"><span class="look-name">Full Commander Build</span><span class="look-level">Weekend project</span></div>
-            <p class="look-desc">Add a structured rider harness over the jacket, combat boots, and a full military rank badge display. Dain's full look is the war college dress uniform taken seriously — every piece earned, every detail intentional.</p>
-            <div class="product-list">
-              <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Rider harness (prop)</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🎖️</span><span class="btn-label">Military rank badge set</span><span class="btn-arrow">→</span></a>
-              <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
-            </div>
-          </div>
+        <div class="product-list">
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🟫</span><span class="btn-label">Military-cut brown / khaki jacket</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🏅</span><span class="btn-label">Gold command insignia pin</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">👖</span><span class="btn-label">Dark fitted uniform trousers</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pfw" target="_blank" rel="noopener"><span class="btn-icon">🐉</span><span class="btn-label">Rider harness (prop)</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pg" target="_blank" rel="noopener"><span class="btn-icon">🎖️</span><span class="btn-label">Military rank badge set</span><span class="btn-arrow">→</span></a>
+          <a href="#" class="product-btn pn" target="_blank" rel="noopener"><span class="btn-icon">🥾</span><span class="btn-label">Black combat boots</span><span class="btn-arrow">→</span></a>
         </div>
       </div>
 
