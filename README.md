@@ -4,6 +4,93 @@ A static ACOTAR cosplay catalog, with editorial content managed in Airtable and 
 
 **The website reads a generated JSON snapshot. It does not call Airtable from the browser.** JavaScript imports published Airtable records during a local refresh or GitHub Actions build. No Python server or hosted database server is required.
 
+## Connect Airtable to GitHub Pages
+
+This is the implementation path for the hosted site:
+
+**Airtable → private GitHub Actions build → published-only `data/catalog.json` → GitHub Pages.**
+
+Visitors receive static HTML/CSS/JavaScript and public catalog JSON. They never receive the Airtable token. GitHub Pages does not run a Python server or query Airtable directly.
+
+The code for this pipeline is already in this repository. The steps below enable it on GitHub; **they are documentation, not confirmation that remote setup or deployment has been completed**. Enabling the deployment variable allows future `main` pushes and scheduled runs to publish.
+
+### 1. Choose the hosting repository and prepare its code
+
+Use the GitHub repository that is intended to serve the site. Erin's working fork is **Erin-Denton/acotar-cosplay**. Hosting from that fork does not require a pull request or merge into **lizbot/acotar-cosplay**. Do not push to or configure the original repository without separate authorization.
+
+When authorized to publish, make the reviewed implementation available on the hosting repository's `main` branch. It needs the source assets, `data/catalog.json`, `package.json`, `.nvmrc`, `scripts/`, `tests/`, and both files under `.github/workflows/`. Leave `.env`, local caches, `.tools/`, and `dist/` out of Git. The workflow generates `dist/` itself.
+
+If GitHub Actions is disabled on the fork, enable Actions there before continuing. This project's Pages workflow targets `main`; use `main` as the hosting/default branch or deliberately update the workflow before using another branch.
+
+### 2. Prepare Airtable and its read-only token
+
+The current base is **A court of cosplay**, with **Characters**, **Looks**, and **Products** tables. Base/table IDs are configured in `scripts/sync-airtable.mjs`; field names and public eligibility rules are mapped in `scripts/catalog.mjs`. If using another base, update those mappings before building.
+
+Create or reuse an Airtable personal access token with:
+
+- Scope: **`data.records:read`** only.
+- Access: **A court of cosplay** only.
+
+The existing shared read-only token can be used; no separate production token is required. Keep its value private. It does not go in HTML, JavaScript, `data/catalog.json`, or a committed `.env` file.
+
+For initial visible content, set at least one valid **Character**, its **Look**, and a linked **Product** to **Published**. A Product also needs a Title and valid Affiliate URL. Publishing only the Product is insufficient. Optional images, descriptions, colors, and prices can be blank.
+
+### 3. Save the token as a GitHub Actions secret
+
+In the **hosting repository**, open:
+
+**Settings → Secrets and variables → Actions → Secrets → New repository secret**
+
+- Name: **`AIRTABLE_TOKEN`**
+- Value: the read-only Airtable token
+
+The workflow passes this secret to `npm run build` as an environment variable. A local `.env` is neither required nor copied into GitHub. Repository secrets are separate for a fork and the original; configuring one does not configure the other.
+
+### 4. Select the Pages publishing source and confirm the domain
+
+Under **Settings → Pages → Build and deployment**, choose **GitHub Actions** as the source, rather than publishing directly from a branch directory.
+
+The existing `CNAME` is preserved by the build. Review it and the Pages custom-domain settings before publishing from a fork; do not claim or change the original site's domain unintentionally. The relative asset and catalog URLs also support a project address such as `/acotar-cosplay/`.
+
+### 5. Enable the explicit deployment switch
+
+Open **Settings → Secrets and variables → Actions → Variables → New repository variable**:
+
+- Name: **`PAGES_DEPLOY_ENABLED`**
+- Value: **`true`** (lowercase, with no quotes)
+
+This is a repository **variable**, not a secret. Leave it absent in forks that are only for reviewing code. When it is absent or not exactly `true`, the Pages build/deployment is skipped.
+
+### 6. Run the first import and deployment
+
+Open **Actions → Publish Airtable site → Run workflow**, select `main`, and run it.
+
+The prepared workflow in `.github/workflows/pages.yml`:
+
+1. Checks out the code and selects Node 24.
+2. Runs `npm test`.
+3. Runs `npm run build` with the private token: reads Airtable, filters content, resolves images, and generates `dist/`.
+4. Uploads only `dist/` as a Pages artifact.
+5. Deploys that artifact through the `github-pages` environment.
+
+Both the build and deployment must finish successfully. Open the deployment URL shown by GitHub and confirm the expected published characters/products and their images. If the build job is skipped, check the repository variable first; for Airtable 401/403 errors, check the secret and its base access. If deployment is rejected, check that Pages uses Actions and that the deployment environment permits the selected branch.
+
+### 7. Publish later Airtable edits
+
+After the initial setup, the workflow refreshes and publishes:
+
+- On a push to `main`.
+- When **Publish Airtable site** is run manually.
+- Every six hours at minute 17, UTC (`17 */6 * * *`). GitHub can delay scheduled runs.
+
+To publish an Airtable edit sooner, run the workflow manually; an Airtable edit by itself does not trigger a workflow. Scheduled runs use the default branch.
+
+A failed Airtable read, test, or build stops deployment, leaving the existing hosted site unchanged. Image lookup failures use saved-image/icon fallbacks instead. Pages deployments are serialized by the workflow's concurrency setting.
+
+**Upload only the generated `dist/` artifact, never the repository root.** That public artifact contains the explicit asset allowlist, filtered JSON, `.nojekyll`, and the existing `CNAME`—not the token, raw records, Git metadata, or local tools. GitHub Actions generates a fresh catalog for deployment without committing it back into the repository; refresh and commit a reviewed local snapshot separately when collaborators need updated token-free preview data.
+
+For local development before enabling hosting, follow the instructions below. Local commands do not deploy the site.
+
 ## Start here: run a local copy
 
 ### Requirements
@@ -145,9 +232,37 @@ The configured base/table IDs are in `scripts/sync-airtable.mjs`. Field names ar
 
 ### Display behavior
 
-Characters retain selection tabs with their Airtable icons. The site header sticks to the top, and only the character-name tabs stick directly beneath it. The picker heading and introduction scroll normally; sticky offsets adapt to the actual header height. Every eligible Look is a consecutive **h4 section**, not another set of tabs. Product cards are centered with 100×100 image frames and a **Buy on Amazon** pill; the whole card is a single shopping link. Category labels are hidden on cards, but categories still determine sorting and fallback icons.
+Characters retain selection tabs with their Airtable icons. The site header sticks to the top, and only the character-name tabs stick directly beneath it. The Pick Your Character heading scrolls normally and has no explanatory subheading beneath it; sticky offsets adapt to the actual header height. Every eligible Look is a consecutive **h4 section**, not another set of tabs. Product cards are centered with 100×100 image frames and a **Buy on Amazon** pill; the whole card is a single shopping link. Category labels are hidden on cards, but categories still determine sorting and fallback icons.
 
-The grid has 3 columns above 900px, 2 from 601–900px, and 1 at 600px and below. Images use `object-fit: contain`, preserving proportions. The site uses a fixed dark theme with no light-mode toggle. The sky animation, analytics, and affiliate disclosure remain. Groups and Tips are outside the current MVP.
+The grid has 3 columns above 900px, 2 from 601–900px, and 1 at 600px and below. Images use `object-fit: contain`, preserving proportions. The site uses a fixed dark theme with no light-mode toggle. Groups and Tips are outside the current MVP.
+
+The main logo reads **A Court of Cosplay**, with **Cosplay** in gold and the remaining words in white. The centered affiliate banner sits directly below the main header, above the hero, and scrolls away normally. The hero is transparent so the animated sky remains visible behind it. The picker heading and tabs share a purple background, but only the tabs stick below the main header.
+
+Current hero copy is in `index.html`, not Airtable:
+
+- Eyebrow: **UNOFFICIAL FAN COSPLAY GUIDE FOR THE WORLD OF SARAH J MAAS**
+- Heading: **LIKE CALLS TO LIKE.**
+- Subtitle: **Character-by-character costume guides. What do you see when you look in the Ouroboros Mirror?**
+
+There is no ACOTAR pill beneath the hero. The character picker retains the series label above its heading.
+
+### Animation behavior and controls
+
+| Effect | Current behavior | Where to change it |
+|---|---|---|
+| Heading colors | Soft pools of violet, gold, and moonlight drift within the letters on a 28-second cycle | `catalog.css`: `title-drift` and `.hero-title-text` |
+| Heading glow | Slow 16-second fade in/out | `catalog.css`: `title-aura` |
+| Small heading twinkles | Three decorative sparkles, staggered on 4.5-second cycles | `catalog.css`: `title-twinkle`, `.hero-title-stars i` |
+| Heading shooting star | Removed, including its dust trail; do not restore it as part of sky changes | No active heading comet rules |
+| Click/tap shooting stars | Cyan stars pass through non-interactive click/tap locations | `starfall-sky.js`: input handlers and `ShootingStar` |
+| Automatic meteor showers | Start every 15 seconds while the page is visible and motion is allowed; 10–16 stars launch over roughly 4 seconds | `SFCFG.STARFALL_INTERVAL`, count, and spread settings |
+| Shooting-star dust | Cyan dust lingers for roughly 2–3 seconds; particle count is capped | `SFCFG.SHOOT_DUST_RATE`, `SHOOT_DUST_MAX`, and `Particle` |
+
+Shooting-star body color is `#57f3de` and core color is `#d4fffa`, configured in `SFCFG`. Normal background stars keep their separate white/gold/violet palette. Moving the cursor adds parallax and brightens nearby stars; it does not itself launch a shooting star.
+
+Clicks/taps on links, buttons, form controls, labels, and elements with `data-no-star` do not launch stars. Interactive launches are capped while stars are already in flight. Automatic showers are scheduled **start-to-start**, rather than adding a pause after the previous shower ends. The first automatic shower is scheduled 15 seconds after sky initialization; background-tab throttling can delay timers.
+
+With **prefers-reduced-motion**, the heading uses static text/glow, decorative heading sparkles are hidden, and new click/tap launches and automatic showers are suppressed. The background's normal twinkle slows substantially. The sky animation pauses when the page is hidden. These effects do not change Airtable data, and the CSS/JavaScript animation settings are not Airtable fields.
 
 ## Automatic product images
 
@@ -186,7 +301,7 @@ Run these from the repository folder. The optional macOS/Linux helper accepts a 
 
 | Command | Airtable access? | Result |
 |---|---|---|
-| `npm test` | No; network responses are mocked | Runs the publication, image, failure, and preview checks |
+| `npm test` | No external requests; mocked responses and a temporary local HTTP port | Runs publication, image, failure, static preview, and shooting-star checks |
 | `npm start` | No | Builds saved snapshot, then starts static preview |
 | `npm run sync` | Yes | Updates `data/catalog.json`; does not rebuild `dist/` |
 | `npm run refresh` | Yes | Alias for live build: imports Airtable and rebuilds `dist/` |
@@ -218,6 +333,9 @@ Open **http://127.0.0.1:8766/acotar-cosplay/**. This tests the relative asset/da
 | Code/style edit not visible | Run `npm run build:snapshot`, then reload; there is no file watcher. |
 | Published product missing | Check Title, URL, linked Look, Look's single Character, and Published status on all three levels. Empty parents disappear. |
 | Product thumbnail missing | Confirm a live refresh ran. Check the lookup summary, saved Thumbnail URL, and image cache. An Amazon product page URL is not an image URL. |
+| Heading/stars appear static | Check the device/browser reduced-motion setting and whether the tab is visible. The color drift takes 28 seconds and the glow 16 seconds; the removed heading comet should not appear. |
+| Click does not launch a star | Click a non-interactive part of the sky/hero, not a product link or navigation tab. Reduced motion and the concurrent-star limit can also suppress a launch. |
+| Local test reports `listen EPERM` | The static preview check opens a loopback port. In a restricted agent environment, grant the local network permission and rerun; do not remove or skip the test to conceal the restriction. |
 | Airtable 401/403 | Check token validity, read scope, and base access. Check for an older environment-variable token overriding `.env`. Never print the credential to diagnose this. |
 | Airtable 429 / refresh slow | Check quota/rate limits. Airtable retries and image timeouts can delay a build; do not repeatedly start simultaneous refreshes. |
 | Empty catalog but no error | All records may be Draft, incomplete, or detached. Check parent statuses and linked records. |
@@ -227,46 +345,31 @@ Open **http://127.0.0.1:8766/acotar-cosplay/**. This tests the relative asset/da
 
 ### Review before merge
 
-Erin's fork is `Erin-Denton/acotar-cosplay`; the original repository is `lizbot/acotar-cosplay`. A friend should test the actual pushed review branch locally using the saved snapshot first, then optionally refresh using the privately shared token.
+Erin's fork is `Erin-Denton/acotar-cosplay`; the original repository is `lizbot/acotar-cosplay`. **A request to push in this project means push to Erin's fork only. It does not authorize opening an upstream pull request, requesting a merge, or pushing to the original repository.** Any such upstream action needs a separate explicit instruction from Erin. A friend should test the actual pushed review branch locally using the saved snapshot first, then optionally refresh using the privately shared token.
 
 Before approving a merge, check the rendered headings, card layout at desktop/mobile sizes, product destinations/images, dark-theme readability, and keyboard navigation. `npm test` uses fixtures; any manual edit in the shared Airtable base is a real editorial change, not isolated test data. Coordinate such edits with the owner.
 
 `.github/workflows/check.yml` runs tests and a snapshot build on pushes and pull requests. It needs no Airtable secret and does not deploy. A fork pull request can be reviewed without granting it a production credential.
 
-### Enable hosting only when authorized
+### Deployment setup reference
 
-The Pages workflow is prepared in the clone. This documentation does not assert that remote hosting settings have been configured. Do not enable deployment on a review fork unintentionally.
-
-In the repository that will actually host the site:
-
-1. Review/merge the intended code.
-2. Under **Settings → Secrets and variables → Actions**, add repository secret **AIRTABLE_TOKEN** with the read-only token. The original and fork have separate secrets; `.env` is not transferred by Git.
-3. Under **Settings → Pages**, choose **GitHub Actions** as the publishing source.
-4. Add Actions repository variable **PAGES_DEPLOY_ENABLED** with the exact value **true**. Leaving it absent disables the prepared deployment job.
-5. From **Actions → Publish Airtable site**, run the workflow on `main`, then verify the deployed URL.
-6. Review the domain settings. The existing `CNAME` is copied into `dist/`; a review fork should not claim the original site's domain.
-
-Once enabled, `.github/workflows/pages.yml` runs on pushes to `main`, manual request, and cron `17 */6 * * *` (every six hours at minute 17, UTC). GitHub schedules can be delayed; this is not instant publication. Use a manual run to publish an edit sooner. Scheduled workflows use the default branch; keep the intended production/default branch aligned with the workflow's `main` setup.
-
-The workflow tests the code, imports fresh data, builds the site, uploads only `dist/`, and deploys the Pages artifact. The token is supplied only to the import/build step. An Airtable/build failure stops deployment; an image-lookup failure uses fallbacks instead. Concurrency serializes Pages deployments.
-
-**Never upload the repository root as the website.** Only the allowlisted `dist/` build is the publishable artifact.
+Use the [Airtable-to-GitHub Pages implementation steps at the top](#connect-airtable-to-github-pages). A request to push code does not automatically authorize enabling hosting, creating an upstream pull request, or changing a custom domain.
 
 ## File map and generated files
 
 | Path | Responsibility |
 |---|---|
 | `index.html` | Page shell, dark-theme styling, analytics, disclosures; no hardcoded character/product catalog |
-| `catalog.js` | Static JSON loading, character selection, stacked looks, cards, image-load fallback, click tracking |
-| `catalog.css` | Responsive grid, thumbnails, centered cards, pills, section spacing |
-| `starfall-sky.js`, `starfall-sky.css` | Background animation |
+| `catalog.js` | Static JSON loading, icon-bearing character tabs, adaptive sticky offsets, stacked looks, cards, image fallback, click tracking |
+| `catalog.css` | Responsive grid, thumbnails, centered cards, pills, sticky tab styling, heading color/glow/twinkle animations |
+| `starfall-sky.js`, `starfall-sky.css` | Canvas sky, cyan click/tap stars, 15-second meteor showers, dust particles, reduced-motion behavior |
 | `scripts/catalog.mjs` | Pure data filtering and public output mapping |
 | `scripts/sync-airtable.mjs` | Base/table configuration, private record reads, paging/retries, snapshot write |
 | `scripts/product-images.mjs` | Amazon metadata extraction, allowed hosts, image cache |
 | `scripts/build.mjs` | Live/snapshot build and public asset allowlist |
 | `scripts/preview.mjs` | Loopback static preview; no API backend |
 | `scripts/local.sh` | Optional local Node/npm launcher |
-| `tests/*.test.mjs` | Mocked data/image tests and static HTTP/artifact checks |
+| `tests/*.test.mjs` | Mocked data/image tests, static HTTP/artifact checks, and isolated sky tests for cyan colors, frame-rate-independent dust, lifetime, and particle limits |
 | `.github/workflows/check.yml` | Secret-free review checks |
 | `.github/workflows/pages.yml` | Opt-in live import and Pages deployment |
 | `package.json`, `.nvmrc` | Commands and runtime version |
@@ -282,7 +385,7 @@ The workflow tests the code, imports fresh data, builds the site, uploads only `
 
 Treat this section as project context, alongside any applicable `AGENTS.md` and the human's current instructions.
 
-1. **Establish scope first.** Work has been local-only; do not infer permission to commit, push, merge, deploy, change Pages settings, or enable the deployment variable from a request to preview or update documentation. Follow explicit current human authorization.
+1. **Establish scope first.** Default to local edits. Earlier authorized commits/pushes do not authorize another push. Do not infer permission to commit, push, merge, deploy, change Pages settings, or enable the deployment variable from a preview/documentation request. When Erin asks to push, verify `origin` is `Erin-Denton/acotar-cosplay` and push only there; do not create an upstream pull request or merge request unless she separately directs it.
 2. **Inspect before editing.** Read `git status --short`, this README, applicable repository instructions, and the relevant source files. Preserve unrelated/uncommitted work. Confirm the working directory and review branch rather than assuming the remote matches the local clone.
 3. **Choose the right mode.** Use `npm start` / `build:snapshot` for a token-free saved-data preview. Use `refresh` when the human wants current Airtable content. Explain that refreshing the browser alone does not import Airtable.
 4. **Handle secrets without exposing them.** Never print/read a token into chat, put it in browser code, commit `.env`, pass it in a URL, or upload private cache files. Use the local environment loader and GitHub Actions secrets. Report whether authentication works, not the credential value.
@@ -290,7 +393,7 @@ Treat this section as project context, alongside any applicable `AGENTS.md` and 
 6. **Keep the architecture static.** Do not restore `/api/catalog`, introduce browser-side Airtable calls, reintroduce Python, or deploy the preview server. Add public fields through the mapper and renderer deliberately; preserve draft/parent filtering and relative asset paths.
 7. **Understand generated output.** Edit source, then build. Do not hand-edit `dist/` or `data/catalog.json` to disguise an import/filtering problem; source content belongs in Airtable. Keep a reviewed generated snapshot for collaborator previews. Do not claim that tests with mocked responses prove a live refresh succeeded.
 8. **Keep images best-effort.** Do not invent image URLs, pick arbitrary advertisements, bypass challenge pages, or let missing metadata fail the catalog. Check main image extraction, purchase-URL cache matching, saved-thumbnail fallback, then icon fallback.
-9. **Verify proportionately.** Run `npm test` for import/filter/image logic changes. Run a snapshot build and browser checks for renderer/style changes; check 3/2/1-column responsiveness and stacked h4 sections. Test the project subpath when changing URLs. For documentation-only work, check instructions against source and validate links/formatting without unnecessary live imports.
+9. **Verify proportionately.** Run `npm test` for import/filter/image logic changes. Run a snapshot build and browser checks for renderer/style changes; check 3/2/1-column responsiveness, stacked h4 sections, and character tabs sticking beneath the main header without keeping the picker heading onscreen. For animation changes, verify reduced-motion behavior, the absence of a heading comet, and the cyan sky/dust palette. Test the project subpath when changing URLs. For documentation-only work, check instructions against source and validate links/formatting without unnecessary live imports.
 10. **Report concrete results.** Name whether the preview used a saved snapshot or a successful live import, any remaining fallback/credential blocker, what was checked, and whether anything was pushed/deployed. Never call a prepared workflow a completed deployment.
 
 Useful diagnostic files are `data/catalog.json` (last successful public import), `dist/data/catalog.json` (what the local preview actually serves), and `.image-cache.json` (private image lookup state). Compare public snapshots and record IDs rather than printing raw records or private configuration unnecessarily.
